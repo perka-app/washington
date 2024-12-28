@@ -1,13 +1,13 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
-export const AuthGuard = ({ comp }: { comp: ReactNode }) => {
+export const UnAuthGuard = ({ comp }: { comp: ReactNode }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState();
 
-  const checkForUser = () => {
-    if (!user) {
-      navigate(`/login`);
+  const checkForUser = (): void => {
+    if (user) {
+      navigate(`/customer-page`);
     }
   };
 
@@ -15,7 +15,7 @@ export const AuthGuard = ({ comp }: { comp: ReactNode }) => {
     checkForUser();
   }, [comp, user]);
 
-  return !user ? (
+  return user ? (
     <React.Fragment></React.Fragment>
   ) : (
     <React.Fragment>{comp}</React.Fragment>

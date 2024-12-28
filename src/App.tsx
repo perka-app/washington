@@ -3,11 +3,11 @@ import { cn } from "src/lib/utils";
 import { BrowserRouter, Routes, Route } from "react-router";
 
 import AnimatedGridPattern from "src/components/ui/animated-grid-pattern";
+import DashboardPage from "src/pages/dashboard";
+import CommunicationPage from "src/pages/communication";
+import LoginPage from "src/pages/login";
+import { AuthGuard, UnAuthGuard } from "src/guards";
 import "src/App.css";
-import DashboardPage from "./pages/dashboard";
-import CommunicationPage from "./pages/communication";
-import LoginPage from "./pages/login";
-import { AuthGuard } from "./guards/AuthGuard";
 
 function App() {
   return (
@@ -15,8 +15,6 @@ function App() {
       <div className="AppHeader sticky-header center-vertical">
         <h1 className="text-left">PERKA</h1>
       </div>
-      <AuthGuard comp={<DashboardPage />} />
-      <AuthGuard comp={<CommunicationPage />} />
 
       <BrowserRouter>
         <Routes>
@@ -25,7 +23,7 @@ function App() {
             path="/communication"
             element={<AuthGuard comp={<CommunicationPage />} />}
           />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<UnAuthGuard comp={<LoginPage />} />} />
         </Routes>
       </BrowserRouter>
 
