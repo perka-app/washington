@@ -1,11 +1,9 @@
-import BaseContainer from "components/perka/BaseContainer";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "state/user/user.slice";
-import { Label } from "@radix-ui/react-label";
-import { Input } from "components/ui/input";
+import BaseContainer from "components/perka/Board";
+import { TextField, Button } from "@mui/material";
 import "./styles.css";
-import { Button } from "src/components/ui/button";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -19,15 +17,33 @@ export default function LoginPage() {
   };
 
   return (
-    <div>
-      <BaseContainer className="Container">
+    <div className="Container">
+      <BaseContainer>
         <h1>Login Page</h1>
-        <Label htmlFor="login">Accept terms and conditions</Label>
-        <Input id="login" placeholder="your_login" />
-
-        <Label htmlFor="password">Accept terms and conditions</Label>
-        <Input id="password" type="password" placeholder="password" />
-        <Button onClick={login}>Login</Button>
+        <TextField
+          id="login"
+          label="Login"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+        />
+        <TextField
+          id="password"
+          label="Password"
+          type="password"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+        />
+        <Button
+          onClick={login}
+          variant="contained"
+          color="primary"
+          fullWidth
+          style={{ marginTop: "16px" }}
+        >
+          Login
+        </Button>
       </BaseContainer>
     </div>
   );

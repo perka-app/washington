@@ -1,10 +1,11 @@
 import React from "react";
-import { Button } from "src/components/ui/button";
-import "./styles.css";
-import { useDispatch, useSelector } from "react-redux";
-import { userSelector } from "state/user/user.selector";
+import { useSelector, useDispatch } from "react-redux";
+import { Button, Typography } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
+
 import { clearUser } from "state/user/user.slice";
-import { LogOut } from "lucide-react";
+import { userSelector } from "state/user/user.selector";
+import "./styles.css";
 
 export default function AppHeader() {
   const user = useSelector(userSelector);
@@ -15,15 +16,21 @@ export default function AppHeader() {
   };
 
   return (
-    <div className="AppHeader center-vertical">
-      <h1 className="text-left">PERKA</h1>
+    <div className="app-header">
+      <Typography variant="h4" className="text-left">
+        PERKA
+      </Typography>
 
       {user ? (
-        <div className="ml-auto flex items-center">
-          <h1>{user.name}</h1>
-          <Button variant="outline" onClick={logout} className=" ml-10">
+        <div className="user-controls">
+          <Typography variant="h6">{user.name}</Typography>
+          <Button
+            variant="outlined"
+            onClick={logout}
+            startIcon={<LogoutIcon />}
+            className="logout-button"
+          >
             Logout
-            <LogOut />
           </Button>
         </div>
       ) : null}
