@@ -1,0 +1,10 @@
+.AppHeader {
+  padding: 0 10% 0 10%;
+  height: 100px;
+  align-items: center;
+}
+
+.center-vertical {
+  display: flex;
+  align-items: center;
+}

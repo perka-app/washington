@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-import { cn } from "src/lib/utils";
+import { cn } from "lib/utils";
 
 interface AnimatedGridPatternProps {
   width?: number;
@@ -60,8 +60,8 @@ export default function AnimatedGridPattern({
               ...sq,
               pos: getPos(),
             }
-          : sq,
-      ),
+          : sq
+      )
     );
   };
 
@@ -100,7 +100,7 @@ export default function AnimatedGridPattern({
       aria-hidden="true"
       className={cn(
         "pointer-events-none absolute inset-0 h-full w-full fill-violet-400/30 stroke-violet-400/30",
-        className,
+        className
       )}
       {...props}
     >

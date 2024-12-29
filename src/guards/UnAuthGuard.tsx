@@ -1,21 +1,24 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+
+import { isAuthorizedSelector } from "state/user/user.selector";
 
 export const UnAuthGuard = ({ comp }: { comp: ReactNode }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState();
+  const authorized = useSelector(isAuthorizedSelector);
 
-  const checkForUser = (): void => {
-    if (user) {
-      navigate(`/customer-page`);
+  const checkForAuthorization = (): void => {
+    if (authorized) {
+      navigate(`/`);
     }
   };
 
   useEffect(() => {
-    checkForUser();
-  }, [comp, user]);
+    checkForAuthorization();
+  }, [comp, authorized]);
 
-  return user ? (
+  return authorized ? (
     <React.Fragment></React.Fragment>
   ) : (
     <React.Fragment>{comp}</React.Fragment>

@@ -1,31 +1,38 @@
 import React from "react";
-import { cn } from "src/lib/utils";
+import { cn } from "lib/utils";
 import { BrowserRouter, Routes, Route } from "react-router";
 
-import AnimatedGridPattern from "src/components/ui/animated-grid-pattern";
-import DashboardPage from "src/pages/dashboard";
-import CommunicationPage from "src/pages/communication";
-import LoginPage from "src/pages/login";
-import { AuthGuard, UnAuthGuard } from "src/guards";
-import "src/App.css";
+import AnimatedGridPattern from "components/ui/animated-grid-pattern";
+import DashboardPage from "pages/dashboard";
+import CommunicationPage from "pages/communication";
+import LoginPage from "pages/login";
+import { AuthGuard, UnAuthGuard } from "guards";
+import "App.css";
+import AppHeader from "containers/AppHeader";
 
 function App() {
   return (
     <div className="App full-width">
-      <div className="AppHeader sticky-header center-vertical">
-        <h1 className="text-left">PERKA</h1>
-      </div>
+      <AppHeader />
 
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<AuthGuard comp={<DashboardPage />} />}></Route>
-          <Route
-            path="/communication"
-            element={<AuthGuard comp={<CommunicationPage />} />}
-          />
-          <Route path="/login" element={<UnAuthGuard comp={<LoginPage />} />} />
-        </Routes>
-      </BrowserRouter>
+      <div className="z-10">
+        <BrowserRouter>
+          <Routes>
+            <Route
+              index
+              element={<AuthGuard comp={<DashboardPage />} />}
+            ></Route>
+            <Route
+              path="/communication"
+              element={<AuthGuard comp={<CommunicationPage />} />}
+            />
+            <Route
+              path="/login"
+              element={<UnAuthGuard comp={<LoginPage />} />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </div>
 
       <AnimatedGridPattern
         numSquares={30}
