@@ -7,15 +7,15 @@ import DashboardPage from "pages/dashboard";
 import CommunicationPage from "pages/communication";
 import LoginPage from "pages/login";
 import { AuthGuard, UnAuthGuard } from "guards";
-import "App.css";
 import AppHeader from "containers/AppHeader";
+import "App.css";
 
 function App() {
   return (
     <div className="App full-width">
       <AppHeader />
 
-      <div className="z-10">
+      <div className="z-20 relative">
         <BrowserRouter>
           <Routes>
             <Route
