@@ -11,7 +11,7 @@ import "@fontsource/roboto/700.css";
 import "./index.css";
 import App from "./App";
 import { store } from "state/store";
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "theme";
 
 const root = ReactDOM.createRoot(

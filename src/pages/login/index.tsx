@@ -1,19 +1,26 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { setUser } from "state/user/user.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "state/store";
 import BaseContainer from "components/perka/Board";
 import { TextField, Button } from "@mui/material";
 import "./styles.css";
+import { loginUser } from "state/user/user.thunks";
+import { loginProcessSelector } from "state/user/user.selector";
 
 export default function LoginPage() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const loginLoader = useSelector(loginProcessSelector);
 
-  const login = () => {
-    dispatch(
-      setUser({
-        name: "Test Organisation",
-      })
-    );
+  const [login, setLogin] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const loginHandler = () => {
+    const credentials = {
+      login,
+      password,
+    };
+
+    dispatch(loginUser(credentials));
   };
 
   return (
@@ -26,6 +33,8 @@ export default function LoginPage() {
           variant="outlined"
           fullWidth
           margin="normal"
+          value={login}
+          onChange={(e) => setLogin(e.target.value)}
         />
         <TextField
           id="password"
@@ -34,13 +43,16 @@ export default function LoginPage() {
           variant="outlined"
           fullWidth
           margin="normal"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Button
-          onClick={login}
+          onClick={loginHandler}
           variant="contained"
           color="primary"
           fullWidth
           style={{ marginTop: "16px" }}
+          disabled={loginLoader}
         >
           Login
         </Button>

@@ -12,3 +12,8 @@ export const isAuthorizedSelector = createSelector(
   selectUserSlice,
   (userState) => (userState.user ? true : false)
 );
+
+export const loginProcessSelector = createSelector(
+  selectUserSlice,
+  (userState) => userState.processes.login.pending
+);
