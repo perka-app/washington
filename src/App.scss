@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.App {
+  &-Body {
+    display: flex;
+    flex-direction: row;
+    min-width: 300px; // Minimum width for the entire container
+    max-width: 100%; // Maximum width for the entire container  
+    margin-top: 40px;
+  }
+
+  &-Content {
+    flex: 1 1 auto; // Allow the content to grow and shrink
+    padding: 20px;
+    min-width: 300px; // Minimum width for the content  
+  }
+
+  &-LeftBar, &-RightBar {
+    display: flex;
+    flex-direction: column; // Arrange images in a column
+    flex: 0 1 200px; // Allow side panels to shrink but not grow
+    min-width: 0; // Minimum width for side panels
+
+    // Hide when screen is small
+    @media (max-width: 950px) {
+      display: none;
+    }
+  }
+  
+  &-LeftBar {
+    .App-Arrow {
+      align-self: start;
+      rotate: 180deg;
+
+      &__1 {
+        height: 90px;
+        width: 85px;
+        position: relative;
+        top: 270px;
+      }
+
+      &__2 {
+        height: 70px;
+        width: 120px;
+        position: relative;
+        top: 200px;
+      }
+
+      &__3 {
+        height: 70px;
+        width: 80px;
+        position: relative;
+        top: 200px;
+      }
+    }
+  }
+
+  &-RightBar {
+    .App-Arrow {
+      align-self: end;
+
+      &__1 {
+        height: 70px;
+        width: 80px;
+      }
+
+      &__2 {
+        height: 70px;
+        width: 120px;
+      }
+
+      &__3 {
+        height: 90px;
+        width: 85px;
+        position: relative;
+        top: -70px;
+      }
+    }
+  }
+
+  &-Arrow {
+    margin-bottom: 20px;
+  }
+}
