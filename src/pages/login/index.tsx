@@ -2,10 +2,11 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "state/store";
 import BaseContainer from "components/perka/Board";
-import { TextField, Button } from "@mui/material";
-import "./styles.css";
+import { TextField, Button, Typography } from "@mui/material";
 import { loginUser } from "state/user/user.thunks";
 import { loginProcessSelector } from "state/user/user.selector";
+
+import "./styles.scss";
 
 export default function LoginPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,9 +25,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="Container">
+    <div className="Login">
       <BaseContainer>
-        <h1>Login Page</h1>
+        <Typography variant="h6" className="Login-Logo">
+          Join our family and stay connected!
+        </Typography>
+
         <TextField
           id="login"
           label="Login"
@@ -36,6 +40,7 @@ export default function LoginPage() {
           value={login}
           onChange={(e) => setLogin(e.target.value)}
         />
+
         <TextField
           id="password"
           label="Password"
@@ -46,12 +51,13 @@ export default function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
         <Button
           onClick={loginHandler}
           variant="contained"
           color="primary"
           fullWidth
-          style={{ marginTop: "16px" }}
+          style={{ marginTop: "20px" }}
           disabled={loginLoader}
         >
           Login

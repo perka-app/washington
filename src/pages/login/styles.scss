@@ -1,0 +1,17 @@
+.Login {
+  align-items: center;
+  border: #400031 solid 4px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: 800px;
+  min-width: 650px;
+  padding: 100px 150px;
+
+  &-Logo {
+    margin: -20px 0 50px !important;
+    text-align: center;
+  }
+}

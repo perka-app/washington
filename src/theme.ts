@@ -9,7 +9,32 @@ export const theme = createTheme({
         disableRipple: true, // No more ripple, on the whole application 💣!
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "20px",
+          height: "50px",
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: "20px",
+        },
+      },
+    },
   },
+  typography: {
+    fontFamily: "Inter, Roboto, sans-serif",
+    h4: {
+        letterSpacing: "0.3em",
+        fontWeight: 700,
+    },
+    h6: {
+        fontWeight: 500,
+    },
+  },  
   palette: {
     primary: {
       main: "#B66896",

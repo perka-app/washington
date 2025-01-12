@@ -1,20 +1,17 @@
-.app-header {
+.AppHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
+  
+  &-UserControls {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+    
+  &-LogoutButton {
+      margin-left: 1rem;
+  }
 }
-
-.text-left {
-  text-align: left;
-}
-
-.user-controls {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-}
-
-.logout-button {
-  margin-left: 1rem;
-}
+    

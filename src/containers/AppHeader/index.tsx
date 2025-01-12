@@ -17,19 +17,21 @@ export default function AppHeader() {
   };
 
   return (
-    <div className="app-header">
-      <Typography variant="h4" className="text-left">
+    <div className="AppHeader">
+        
+      <Typography variant="h4" className="AppHeader-Logo">
         PERKA
       </Typography>
 
       {user ? (
-        <div className="user-controls">
+        <div className="AppHeader-UserControls">
           <Typography variant="h6">{user.name}</Typography>
+          
           <Button
             variant="outlined"
             onClick={logout}
             startIcon={<LogoutIcon />}
-            className="logout-button"
+            className="AppHeader-LogoutButton"
           >
             Logout
           </Button>
