@@ -1,13 +1,14 @@
-import React, { ReactNode } from "react";
-import "./styles.css";
+import React, { ReactNode } from 'react'
 
-interface BoardProps {
-  children: ReactNode;
-  className?: string;
+import './styles.css'
+
+type BoardProps = {
+  children: ReactNode
+  className?: string
 }
 
 const Board: React.FC<BoardProps> = ({ children }) => {
-  return <div className="InternalStyles">{children}</div>;
-};
+  return <div className="InternalStyles">{children}</div>
+}
 
-export default Board;
+export default Board

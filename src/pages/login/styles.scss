@@ -6,12 +6,12 @@
   flex-direction: column;
   justify-content: center;
   margin: auto;
-  max-width: 800px;
+  max-width: 1000px;
   min-width: 650px;
   padding: 100px 150px;
 
-  &-Logo {
-    margin: -20px 0 50px !important;
+  &-Slogan {
+    margin: 20px 0 50px !important;
     text-align: center;
   }
 }

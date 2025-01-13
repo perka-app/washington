@@ -1,34 +1,41 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "state/store";
-import BaseContainer from "components/perka/Board";
-import { TextField, Button, Typography } from "@mui/material";
-import { loginUser } from "state/user/user.thunks";
-import { loginProcessSelector } from "state/user/user.selector";
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { TextField, Button, Typography } from '@mui/material'
+import { cn } from '@bem-react/classname'
 
-import "./styles.scss";
+import { loginProcessSelector } from 'state/user/user.selector'
+import { AppDispatch } from 'state/store'
+import { loginUser } from 'state/user/user.thunks'
+import BaseContainer from 'components/perka/Board'
+
+import './styles.scss'
 
 export default function LoginPage() {
-  const dispatch = useDispatch<AppDispatch>();
-  const loginLoader = useSelector(loginProcessSelector);
+  const bem = cn('Login')
+  const dispatch = useDispatch<AppDispatch>()
+  const loginLoader = useSelector(loginProcessSelector)
 
-  const [login, setLogin] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [login, setLogin] = React.useState('')
+  const [password, setPassword] = React.useState('')
 
   const loginHandler = () => {
     const credentials = {
       login,
       password,
-    };
+    }
 
-    dispatch(loginUser(credentials));
-  };
+    dispatch(loginUser(credentials))
+  }
 
   return (
-    <div className="Login">
+    <div className={bem()}>
       <BaseContainer>
-        <Typography variant="h6" className="Login-Logo">
-          Join our family and stay connected!
+        <Typography variant="h4" className={bem('Title')}>
+          PERKA DASHBOARD
+        </Typography>
+
+        <Typography variant="h6" className={bem('Slogan')}>
+          Manage your community here!
         </Typography>
 
         <TextField
@@ -57,12 +64,12 @@ export default function LoginPage() {
           variant="contained"
           color="primary"
           fullWidth
-          style={{ marginTop: "20px" }}
+          style={{ marginTop: '20px' }}
           disabled={loginLoader}
         >
           Login
         </Button>
       </BaseContainer>
     </div>
-  );
+  )
 }
