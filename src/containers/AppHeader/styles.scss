@@ -3,15 +3,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  
+
   &-UserControls {
-    display: flex;
+    display: contents;
     align-items: center;
     margin-left: auto;
   }
-    
+
   &-LogoutButton {
-      margin-left: 1rem;
+    margin-left: 1rem;
   }
 }
-    

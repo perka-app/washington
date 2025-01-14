@@ -3,14 +3,14 @@ import { cn } from '@bem-react/classname'
 import { BrowserRouter, Routes, Route } from 'react-router'
 
 import { AuthGuard, UnAuthGuard } from 'guards'
-import CommunicationPage from 'pages/communication'
-import DashboardPage from 'pages/dashboard'
-import LoginPage from 'pages/login'
-import AppHeader from 'containers/AppHeader'
+import { CommunicationPage } from 'pages/communication'
+import { DashboardPage } from 'pages/dashboard'
+import { LoginPage } from 'pages/login'
+import { AppHeader } from 'containers/AppHeader'
 
 import 'App.scss'
 
-function App() {
+export const App: React.FC = () => {
   const bem = cn('App')
   const arrow = (id: number) => bem('Arrow', { [id]: true })
   const images = './assets/images'
@@ -50,5 +50,3 @@ function App() {
     </div>
   )
 }
-
-export default App

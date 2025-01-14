@@ -1,16 +1,17 @@
 import React from 'react'
+import { cn } from '@bem-react/classname'
 import { useDispatch, useSelector } from 'react-redux'
 import { TextField, Button, Typography } from '@mui/material'
-import { cn } from '@bem-react/classname'
 
 import { loginProcessSelector } from 'state/user/user.selector'
 import { AppDispatch } from 'state/store'
 import { loginUser } from 'state/user/user.thunks'
-import BaseContainer from 'components/perka/Board'
+
+import { Board } from 'components/perka/Board'
 
 import './styles.scss'
 
-export default function LoginPage() {
+export const LoginPage: React.FC = () => {
   const bem = cn('Login')
   const dispatch = useDispatch<AppDispatch>()
   const loginLoader = useSelector(loginProcessSelector)
@@ -29,7 +30,7 @@ export default function LoginPage() {
 
   return (
     <div className={bem()}>
-      <BaseContainer>
+      <Board>
         <Typography variant="h4" className={bem('Title')}>
           PERKA DASHBOARD
         </Typography>
@@ -69,7 +70,7 @@ export default function LoginPage() {
         >
           Login
         </Button>
-      </BaseContainer>
+      </Board>
     </div>
   )
 }

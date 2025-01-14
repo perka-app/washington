@@ -7,8 +7,6 @@ type BoardProps = {
   className?: string
 }
 
-const Board: React.FC<BoardProps> = ({ children }) => {
+export const Board: React.FC<BoardProps> = ({ children }) => {
   return <div className="InternalStyles">{children}</div>
 }
-
-export default Board

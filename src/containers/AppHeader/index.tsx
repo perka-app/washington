@@ -1,23 +1,26 @@
-import React from 'react';
+import React from 'react'
 import { cn } from '@bem-react/classname'
-import LogoutIcon from "@mui/icons-material/Logout";
-import { Button, Typography } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
+import LogoutIcon from '@mui/icons-material/Logout'
+import { Button, Typography } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { userSelector } from "state/user/user.selector";
-import { AppDispatch } from "state/store";
-import { clearUser } from "state/user/user.slice";
+import { logoutUser, restoreUser, userSelector } from 'state/user'
+import { AppDispatch } from 'state/store'
 
-import "./styles.css";
+import './styles.scss'
 
-export default function AppHeader() {
-  const bem = cn('AppHeader');
-  const user = useSelector(userSelector);
-  const dispatch = useDispatch<AppDispatch>();
+export const AppHeader: React.FC = () => {
+  const bem = cn('AppHeader')
+  const user = useSelector(userSelector)
+  const dispatch = useDispatch<AppDispatch>()
 
   const logout = () => {
-    dispatch(clearUser());
-  };
+    dispatch(logoutUser())
+  }
+
+  React.useEffect(() => {
+    dispatch(restoreUser())
+  }, [dispatch])
 
   return (
     <div className={bem()}>
@@ -28,7 +31,7 @@ export default function AppHeader() {
       {user ? (
         <div className={bem('UserControls')}>
           <Typography variant="h6">{user.name}</Typography>
-          
+
           <Button
             variant="outlined"
             onClick={logout}
@@ -40,5 +43,5 @@ export default function AppHeader() {
         </div>
       ) : null}
     </div>
-  );
+  )
 }

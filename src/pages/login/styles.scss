@@ -10,6 +10,10 @@
   min-width: 650px;
   padding: 100px 150px;
 
+  &-Title {
+    width: max-content;
+  }
+
   &-Slogan {
     margin: 20px 0 50px !important;
     text-align: center;
