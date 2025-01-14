@@ -7,21 +7,16 @@ import { getToken, saveToken } from 'state/user/user.token'
 
 export const loginUser = createAsyncThunk(
   'user/login',
-  async (credentials: LoginCredentials, { dispatch, rejectWithValue }) => {
+  async (credentials: LoginCredentials, { rejectWithValue }) => {
     try {
       const token = await userApi.login(credentials)
+      const user = await userApi.getUserData(token)
 
-      if (token) {
-        const user = await userApi.getUserData(token)
+      saveToken(token)
 
-        saveToken(token)
-
-        return user
-      } else {
-        return rejectWithValue('Invalid login credentials')
-      }
-    } catch (e) {
-      return rejectWithValue('An error occurred')
+      return user
+    } catch (e: unknown) {
+      return rejectWithValue(e instanceof Error ? e.message : 'Unknown error')
     }
   },
 )
@@ -39,8 +34,8 @@ export const restoreUser = createAsyncThunk(
       } else {
         return rejectWithValue('No token found')
       }
-    } catch (e) {
-      return rejectWithValue('An error occurred')
+    } catch (e: unknown) {
+      return rejectWithValue(e instanceof Error ? e.message : 'Unknown error')
     }
   },
 )

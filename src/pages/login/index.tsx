@@ -14,18 +14,19 @@ import './styles.scss'
 export const LoginPage: React.FC = () => {
   const bem = cn('Login')
   const dispatch = useDispatch<AppDispatch>()
-  const loginLoader = useSelector(loginProcessSelector)
+  const loginProcess = useSelector(loginProcessSelector)
 
   const [login, setLogin] = React.useState('')
   const [password, setPassword] = React.useState('')
 
-  const loginHandler = () => {
-    const credentials = {
-      login,
-      password,
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      loginHandler()
     }
+  }
 
-    dispatch(loginUser(credentials))
+  const loginHandler = () => {
+    dispatch(loginUser({ login, password }))
   }
 
   return (
@@ -58,6 +59,7 @@ export const LoginPage: React.FC = () => {
           margin="normal"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
 
         <Button
@@ -66,10 +68,16 @@ export const LoginPage: React.FC = () => {
           color="primary"
           fullWidth
           style={{ marginTop: '20px' }}
-          disabled={loginLoader}
+          disabled={loginProcess.pending}
         >
           Login
         </Button>
+        {/* Error message: */}
+        {!loginProcess.pending && loginProcess.error && (
+          <Typography variant="h6" className={bem('Error')}>
+            {loginProcess.error}
+          </Typography>
+        )}
       </Board>
     </div>
   )

@@ -4,7 +4,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import { Button, Typography } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { logoutUser, restoreUser, userSelector } from 'state/user'
+import { userActions, restoreUser, userSelector } from 'state/user'
 import { AppDispatch } from 'state/store'
 
 import './styles.scss'
@@ -15,7 +15,7 @@ export const AppHeader: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
 
   const logout = () => {
-    dispatch(logoutUser())
+    dispatch(userActions.logoutUser())
   }
 
   React.useEffect(() => {
