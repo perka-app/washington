@@ -1,6 +1,6 @@
 import React from 'react'
 import { cn } from '@bem-react/classname'
-import { BrowserRouter, Routes, Route } from 'react-router'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
 
 import { AuthGuard, UnAuthGuard } from 'guards'
 import { CommunicationPage } from 'pages/communication'
@@ -37,6 +37,8 @@ export const App: React.FC = () => {
               />
 
               <Route path="/login" element={<UnAuthGuard comp={<LoginPage />} />} />
+
+              <Route path="*" element={<Navigate to="/login" replace />} />
             </Routes>
           </BrowserRouter>
         </div>
