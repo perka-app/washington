@@ -1,15 +1,20 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { loginUser } from "state/user/user.thunks";
-import { User } from "models/UserModel";
+/* eslint-disable immutable/no-mutation */
+import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 
-interface UserState {
-  user?: User;
+import { User } from 'models/UserModel'
+
+import { loginUser, restoreUser } from 'state/user/user.thunks'
+import { removeToken } from 'state/user/user.token'
+
+type UserState = {
+  user?: User
   processes: {
     login: {
-      pending: boolean;
-      error: string | null;
-    };
-  };
+      pending: boolean
+      error: string | null
+    }
+  }
 }
 
 const initialState: UserState = {
@@ -20,35 +25,46 @@ const initialState: UserState = {
       error: null,
     },
   },
-};
+}
 
 const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
-    clearUser: (state) => {
-      state.user = undefined;
+    logoutUser: (state) => {
+      state.user = undefined
+      removeToken()
     },
   },
   extraReducers: (builder) => {
     // Login process
     builder
       .addCase(loginUser.pending, (state) => {
-        state.processes.login.pending = true;
-        state.processes.login.error = null;
+        state.processes.login.pending = true
+        state.processes.login.error = null
       })
       .addCase(loginUser.fulfilled, (state, action: PayloadAction<User>) => {
-        state.processes.login.pending = false;
-        state.user = action.payload;
+        state.processes.login.pending = false
+        state.user = action.payload
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.processes.login.pending = false;
-        state.processes.login.error =
-          (action.payload as string) || "Unknown error";
-      });
+        state.processes.login.pending = false
+        state.processes.login.error = (action.payload as string) || 'Unknown error'
+      })
+      .addCase(restoreUser.pending, (state) => {
+        state.processes.login.pending = true
+        state.processes.login.error = null
+      })
+      .addCase(restoreUser.fulfilled, (state, action: PayloadAction<User>) => {
+        state.processes.login.pending = false
+        state.user = action.payload
+      })
+      .addCase(restoreUser.rejected, (state, action) => {
+        state.processes.login.pending = false
+      })
   },
-});
+})
 
-export const { clearUser } = userSlice.actions;
+export const userActions = userSlice.actions
 
-export default userSlice.reducer;
+export const userReducer = userSlice.reducer

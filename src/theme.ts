@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from '@mui/material'
 
 export const theme = createTheme({
   components: {
@@ -12,37 +12,37 @@ export const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: "20px",
-          height: "50px",
+          borderRadius: '30px',
+          height: '50px',
         },
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderRadius: "20px",
+          borderRadius: '30px',
         },
       },
     },
   },
   typography: {
-    fontFamily: "Inter, Roboto, sans-serif",
+    fontFamily: 'Inter, Roboto, sans-serif',
     h4: {
-        letterSpacing: "0.3em",
-        fontWeight: 700,
+      letterSpacing: '0.3em',
+      fontWeight: 700,
     },
     h6: {
-        fontWeight: 500,
-    },
-  },  
-  palette: {
-    primary: {
-      main: "#B66896",
-      dark: "#8B3C68",
-    },
-    secondary: {
-      main: "#1A2264",
-      dark: "#130E44",
+      fontWeight: 500,
     },
   },
-});
+  palette: {
+    primary: {
+      main: '#B66896',
+      dark: '#8B3C68',
+    },
+    secondary: {
+      main: '#1A2264',
+      dark: '#130E44',
+    },
+  },
+})

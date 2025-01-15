@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react'
 
-export default function CommunicationPage() {
-  return <div>Communication Page</div>;
+export const CommunicationPage: React.FC = () => {
+  return <div>Communication Page</div>
 }

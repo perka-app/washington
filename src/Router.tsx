@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react'
 
-export default function Router() {
-  return <div>Router</div>;
+export const Router: React.FC = () => {
+  return <div>Router</div>
 }

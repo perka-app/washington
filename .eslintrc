@@ -1,0 +1,34 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ],
+  "plugins": [
+    "import",
+    "immutable"
+  ],
+  "rules": {
+    // Add your custom rules here
+    "import/no-unresolved": "error",
+    "import/named": "error",
+    "import/default": "error",
+    "immutable/no-let": "error",
+    "immutable/no-mutation": "error",
+    "immutable/no-this": "error"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      },
+      "typescript": {
+        "alwaysTryTypes": true // Always try to resolve types under `@types` directory even it doesn't contain any source code, like `@types/unist`
+      }
+    }
+  }
+}

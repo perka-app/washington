@@ -5,17 +5,18 @@
     display: flex;
     flex-direction: row;
     min-width: 300px; // Minimum width for the entire container
-    max-width: 100%; // Maximum width for the entire container  
+    max-width: 100%; // Maximum width for the entire container
     margin-top: 40px;
   }
 
   &-Content {
     flex: 1 1 auto; // Allow the content to grow and shrink
     padding: 20px;
-    min-width: 300px; // Minimum width for the content  
+    min-width: 300px; // Minimum width for the content
   }
 
-  &-LeftBar, &-RightBar {
+  &-LeftBar,
+  &-RightBar {
     display: flex;
     flex-direction: column; // Arrange images in a column
     flex: 0 1 200px; // Allow side panels to shrink but not grow
@@ -26,31 +27,31 @@
       display: none;
     }
   }
-  
+
   &-LeftBar {
     .App-Arrow {
       align-self: start;
       rotate: 180deg;
 
-      &__1 {
+      &_1 {
         height: 90px;
         width: 85px;
         position: relative;
-        top: 270px;
+        top: 370px;
       }
 
-      &__2 {
+      &_2 {
         height: 70px;
         width: 120px;
         position: relative;
-        top: 200px;
+        top: 300px;
       }
 
-      &__3 {
+      &_3 {
         height: 70px;
         width: 80px;
         position: relative;
-        top: 200px;
+        top: 300px;
       }
     }
   }
@@ -59,17 +60,17 @@
     .App-Arrow {
       align-self: end;
 
-      &__1 {
+      &_1 {
         height: 70px;
         width: 80px;
       }
 
-      &__2 {
+      &_2 {
         height: 70px;
         width: 120px;
       }
 
-      &__3 {
+      &_3 {
         height: 90px;
         width: 85px;
         position: relative;
