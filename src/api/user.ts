@@ -3,7 +3,6 @@ import axios, { AxiosError } from 'axios'
 import { LoginCredentials } from 'models/LoginCredentials'
 import { LoginResponse } from 'models/LoginResponse'
 import { User } from 'models/UserModel'
-import { A } from 'react-router/dist/development/route-data-aSUFWnQ6'
 
 const API = process.env.REACT_APP_API_URL
 
