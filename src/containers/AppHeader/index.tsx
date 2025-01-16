@@ -1,42 +1,47 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Button, Typography } from "@mui/material";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { AppDispatch } from "state/store";
+import React from 'react'
+import { cn } from '@bem-react/classname'
+import LogoutIcon from '@mui/icons-material/Logout'
+import { Button, Typography } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
 
-import { clearUser } from "state/user/user.slice";
-import { userSelector } from "state/user/user.selector";
-import "./styles.css";
+import { userActions, restoreUser, userSelector } from 'state/user'
+import { AppDispatch } from 'state/store'
 
-export default function AppHeader() {
-  const user = useSelector(userSelector);
-  const dispatch = useDispatch<AppDispatch>();
+import './styles.scss'
+
+export const AppHeader: React.FC = () => {
+  const bem = cn('AppHeader')
+  const user = useSelector(userSelector)
+  const dispatch = useDispatch<AppDispatch>()
 
   const logout = () => {
-    dispatch(clearUser());
-  };
+    dispatch(userActions.logoutUser())
+  }
+
+  React.useEffect(() => {
+    dispatch(restoreUser())
+  }, [dispatch])
 
   return (
-    <div className="AppHeader">
-        
-      <Typography variant="h4" className="AppHeader-Logo">
+    <div className={bem()}>
+      <Typography variant="h4" className={bem('Logo')}>
         PERKA
       </Typography>
 
       {user ? (
-        <div className="AppHeader-UserControls">
+        <div className={bem('UserControls')}>
           <Typography variant="h6">{user.name}</Typography>
-          
+
           <Button
             variant="outlined"
             onClick={logout}
             startIcon={<LogoutIcon />}
-            className="AppHeader-LogoutButton"
+            className={bem('LogoutButton')}
           >
             Logout
           </Button>
         </div>
       ) : null}
     </div>
-  );
+  )
 }
