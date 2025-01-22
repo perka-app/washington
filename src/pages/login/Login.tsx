@@ -11,7 +11,7 @@ import { Board } from 'components/perka/Board'
 
 import './styles.scss'
 
-export const LoginPage: React.FC = () => {
+export const Login: React.FC = () => {
   const bem = cn('Login')
   const dispatch = useDispatch<AppDispatch>()
   const loginProcess = useSelector(loginProcessSelector)

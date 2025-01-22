@@ -1,5 +1,5 @@
 import React from 'react'
 
-export const CommunicationPage: React.FC = () => {
+export const Communication: React.FC = () => {
   return <div>Communication Page</div>
 }

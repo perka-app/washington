@@ -2,15 +2,28 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 1rem 2rem;
 
   &-UserControls {
-    display: contents;
+    display: flex;
     align-items: center;
     margin-left: auto;
   }
 
+  &-Name,
+  &-Logo {
+    cursor: default;
+  }
+
+  &-UserButton,
   &-LogoutButton {
+    cursor: pointer;
+    height: 40px;
     margin-left: 1rem;
+    width: 35px;
+
+    &:hover {
+      color: #666;
+    }
   }
 }
