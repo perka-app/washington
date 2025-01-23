@@ -17,13 +17,14 @@
 
   &-UserButton,
   &-LogoutButton {
+    color: var(--primary-color);
     cursor: pointer;
     height: 40px;
     margin-left: 1rem;
     width: 35px;
 
     &:hover {
-      color: #666;
+      color: var(--primary-color-light);
     }
   }
 }
