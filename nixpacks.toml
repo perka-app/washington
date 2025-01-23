@@ -5,4 +5,4 @@
   NPM_CONFIG_UPDATE_NOTIFIER = 'false' # the update notification is relatively useless in a production environment
   NPM_CONFIG_FUND = 'false' # the fund notification is also pretty useless in a production environment
 [phases.build]
-  cmds = ["echo building!"]
+  cmds = ["echo building!", "echo $NODE_ENV", "npm run build"]
