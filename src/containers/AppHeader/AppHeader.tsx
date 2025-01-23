@@ -27,7 +27,7 @@ export const AppHeader: React.FC = () => {
   return (
     <div className={bem()}>
       <Typography variant="h4" className={bem('Logo')}>
-        PERKA
+        {process.env.REACT_APP_NAME}
       </Typography>
 
       {user ? (
