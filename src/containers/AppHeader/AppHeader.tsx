@@ -1,7 +1,7 @@
 import React from 'react'
 import { cn } from '@bem-react/classname'
-import { Typography } from '@mui/material'
 import { useNavigate } from 'react-router'
+import { Tooltip, Typography } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { userActions, restoreUser, userSelector } from 'state/user'
@@ -27,7 +27,7 @@ export const AppHeader: React.FC = () => {
   return (
     <div className={bem()}>
       <Typography variant="h4" className={bem('Logo')}>
-        {process.env.REACT_APP_NAME}
+        {process.env.REACT_APP_NAME || 'PERKA'}
       </Typography>
 
       {user ? (
@@ -36,9 +36,13 @@ export const AppHeader: React.FC = () => {
             {user.name}
           </Typography>
 
-          <UserButton className={bem('UserButton')} onClick={userPage} />
+          <Tooltip title="Open user settings">
+            <UserButton className={bem('UserButton')} onClick={userPage} />
+          </Tooltip>
 
-          <LogoutButton className={bem('LogoutButton')} onClick={logout} />
+          <Tooltip title="Logout">
+            <LogoutButton className={bem('LogoutButton')} onClick={logout} />
+          </Tooltip>
         </div>
       ) : null}
     </div>

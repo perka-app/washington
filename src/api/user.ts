@@ -4,7 +4,9 @@ import { LoginCredentials } from 'models/LoginCredentials'
 import { LoginResponse } from 'models/LoginResponse'
 import { User } from 'models/UserModel'
 
-const API = `https://${process.env.REACT_APP_API_URL}`
+const API = process.env.REACT_APP_API_URL
+  ? `https://${process.env.REACT_APP_API_URL}`
+  : 'http://localhost:3000'
 
 export const login = async ({ login, password }: LoginCredentials): Promise<string> => {
   console.log('API:', API)
