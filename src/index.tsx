@@ -12,6 +12,7 @@ import './index.css'
 import { App } from './App'
 import { theme } from './theme'
 import { store } from 'state/store'
+import { BrowserRouter } from 'react-router'
 import { reportWebVitals } from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
@@ -19,9 +20,11 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
 )

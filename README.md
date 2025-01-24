@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Local Development
 
-Create a `.env.local` file in the root of the project and add the following:
+Create a `.env` file in the root of the project and add the following:
 
 ```
 PORT=2000

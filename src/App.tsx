@@ -1,12 +1,13 @@
 import React from 'react'
 import { cn } from '@bem-react/classname'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
+import { Routes, Route, Navigate } from 'react-router'
 
 import { AuthGuard, UnAuthGuard } from 'guards'
-import { CommunicationPage } from 'pages/communication'
-import { DashboardPage } from 'pages/dashboard'
-import { LoginPage } from 'pages/login'
-import { AppHeader } from 'containers/AppHeader'
+import { Communication } from 'pages/communication/Communication'
+import { Dashboard } from 'pages/dashboard/Dashboard'
+import { AppHeader } from 'containers/AppHeader/AppHeader'
+import { Login } from 'pages/login/Login'
+import { User } from 'pages/user/User'
 
 import 'App.scss'
 
@@ -27,20 +28,20 @@ export const App: React.FC = () => {
         </div>
 
         <div className="App-Content">
-          <BrowserRouter>
-            <Routes>
-              <Route index element={<AuthGuard comp={<DashboardPage />} />}></Route>
+          <Routes>
+            <Route index element={<AuthGuard comp={<Dashboard />} />}></Route>
 
-              <Route
-                path="/communication"
-                element={<AuthGuard comp={<CommunicationPage />} />}
-              />
+            <Route path="/user" element={<AuthGuard comp={<User />} />} />
 
-              <Route path="/login" element={<UnAuthGuard comp={<LoginPage />} />} />
+            <Route
+              path="/communication"
+              element={<AuthGuard comp={<Communication />} />}
+            />
 
-              <Route path="*" element={<Navigate to="/login" replace />} />
-            </Routes>
-          </BrowserRouter>
+            <Route path="/login" element={<UnAuthGuard comp={<Login />} />} />
+
+            <Route path="*" element={<Navigate to="/login" replace />} />
+          </Routes>
         </div>
 
         <div className="App-RightBar">
