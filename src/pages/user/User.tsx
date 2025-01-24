@@ -8,15 +8,18 @@ import { ReactComponent as UserImage } from 'assets/buttons/user.svg'
 import { userSelector } from 'state/user'
 
 import './User.scss'
+import { AppDispatch } from 'state/store'
 
 export const User: React.FC = () => {
   const bem = cn('User')
   const user = useSelector(userSelector)
+  const dispatch = useDispatch<AppDispatch>()
 
   const loadImageHandler = () => {
     console.log('Loading image...')
     // Implement image loading (Open file load dialog):
     // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
+    dispatch({ type: 'LOAD_IMAGE' })
   }
 
   return (
