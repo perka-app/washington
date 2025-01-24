@@ -9,7 +9,7 @@ import { ReactComponent as LogoutButton } from 'assets/buttons/exit.svg'
 import { ReactComponent as UserButton } from 'assets/buttons/user.svg'
 import { AppDispatch } from 'state/store'
 
-import './styles.scss'
+import './AppHeader.scss'
 
 export const AppHeader: React.FC = () => {
   const bem = cn('AppHeader')
@@ -18,7 +18,7 @@ export const AppHeader: React.FC = () => {
   const navigate = useNavigate()
 
   const logout = () => dispatch(userActions.logoutUser())
-  const userPage = () => navigate('/user')
+  const openUserPage = () => navigate('/user')
 
   React.useEffect(() => {
     dispatch(restoreUser())
@@ -37,7 +37,7 @@ export const AppHeader: React.FC = () => {
           </Typography>
 
           <Tooltip title="Open user settings">
-            <UserButton className={bem('UserButton')} onClick={userPage} />
+            <UserButton className={bem('UserButton')} onClick={openUserPage} />
           </Tooltip>
 
           <Tooltip title="Logout">

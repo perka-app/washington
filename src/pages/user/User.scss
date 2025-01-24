@@ -1,0 +1,45 @@
+.User {
+  align-items: center;
+  border: var(--black) solid 4px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: 1000px;
+  min-width: 650px;
+  padding: 100px 150px;
+
+  padding: 100px 75px;
+
+  &-Avatar {
+    margin: 2rem 0;
+    width: max-content;
+    text-align: center;
+  }
+
+  &-Image {
+    color: var(--black);
+    position: relative;
+    top: -40px;
+    transform: scale(2);
+    width: 100px;
+
+    > .path {
+      stroke-width: 1px;
+    }
+  }
+
+  &-Info {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 2fr;
+    margin: 2rem 0;
+
+    // upply to every odd child element
+    & > *:nth-child(odd) {
+      // font-weight: bold;
+      color: var(--primary-color);
+    }
+  }
+}

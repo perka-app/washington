@@ -9,7 +9,7 @@ import { loginUser } from 'state/user/user.thunks'
 
 import { Board } from 'components/perka/Board'
 
-import './styles.scss'
+import './Login.scss'
 
 export const Login: React.FC = () => {
   const bem = cn('Login')
