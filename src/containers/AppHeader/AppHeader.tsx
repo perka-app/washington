@@ -1,8 +1,8 @@
 import React from 'react'
 import { cn } from '@bem-react/classname'
 import { useNavigate } from 'react-router'
-import { Tooltip, Typography } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
+import { Avatar, Tooltip, Typography } from '@mui/material'
 
 import { userActions, restoreUser, userSelector } from 'state/user'
 import { ReactComponent as LogoutButton } from 'assets/buttons/exit.svg'
@@ -37,7 +37,11 @@ export const AppHeader: React.FC = () => {
           </Typography>
 
           <Tooltip title="Open user settings">
-            <UserButton className={bem('UserButton')} onClick={openUserPage} />
+            {user.avatarUrl ? (
+              <Avatar alt="avatar" className={bem('UserButton')} src={user.avatarUrl} />
+            ) : (
+              <UserButton className={bem('UserButton')} onClick={openUserPage} />
+            )}
           </Tooltip>
 
           <Tooltip title="Logout">

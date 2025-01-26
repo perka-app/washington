@@ -27,13 +27,32 @@ export const restoreUser = createAsyncThunk(
     try {
       const token = getToken()
 
-      if (token) {
-        const user = await userApi.getUserData(token)
-
-        return user
-      } else {
+      if (!token) {
         return rejectWithValue('No token found')
       }
+
+      const user = await userApi.getUserData(token)
+
+      return user
+    } catch (e: unknown) {
+      return rejectWithValue(e instanceof Error ? e.message : 'Unknown error')
+    }
+  },
+)
+
+export const uploadImage = createAsyncThunk(
+  'user/uploadImage',
+  async (image: File, { rejectWithValue }) => {
+    try {
+      const token = getToken()
+
+      if (!token) {
+        return rejectWithValue('No token found')
+      }
+
+      await userApi.uploadImage(token, image)
+
+      window.location.reload()
     } catch (e: unknown) {
       return rejectWithValue(e instanceof Error ? e.message : 'Unknown error')
     }

@@ -1,42 +1,64 @@
-import React from 'react'
-import { cn } from '@bem-react/classname'
-import EditIcon from '@mui/icons-material/Edit'
-import { Button } from '@mui/material'
+import { Avatar, Button, Typography } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
+import React, { useState } from 'react'
+import { CloudUpload } from '@mui/icons-material'
+import { cn } from '@bem-react/classname'
 
+import { AppDispatch } from 'state/store'
+import { HiddenInput } from 'components/HidenInput'
 import { ReactComponent as UserImage } from 'assets/buttons/user.svg'
-import { userSelector } from 'state/user'
+import { uploadImage, uploadingImageProcessSelector, userSelector } from 'state/user'
 
 import './User.scss'
-import { AppDispatch } from 'state/store'
 
 export const User: React.FC = () => {
   const bem = cn('User')
   const user = useSelector(userSelector)
+  const uploading = useSelector(uploadingImageProcessSelector)
   const dispatch = useDispatch<AppDispatch>()
 
-  const loadImageHandler = () => {
-    console.log('Loading image...')
-    // Implement image loading (Open file load dialog):
-    // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
-    dispatch({ type: 'LOAD_IMAGE' })
+  const handleUpload = (image?: File) => {
+    if (!image) {
+      alert('Please select an image first!')
+      return
+    }
+
+    dispatch(uploadImage(image))
   }
 
   return (
     <div className={bem()}>
       <div className={bem('Avatar')}>
-        <UserImage className={bem('Image')} />
+        {user?.avatarUrl ? (
+          <Avatar alt="avatar" className={bem('AvatarImage')} src={user.avatarUrl} />
+        ) : (
+          <UserImage className={bem('Image')} />
+        )}
 
         <Button
-          startIcon={<EditIcon />}
-          onClick={loadImageHandler}
-          variant="contained"
           color="primary"
+          component="label"
+          loading={uploading.pending}
+          loadingPosition="start"
+          startIcon={<CloudUpload />}
+          variant="contained"
+          role={undefined}
           fullWidth
         >
-          Edit user image
+          Upload image
+          <HiddenInput
+            type="file"
+            onChange={(event) => handleUpload(event.target.files?.[0])}
+            multiple
+          />
         </Button>
       </div>
+
+      {!uploading.pending && uploading.error && (
+        <Typography variant="h6" className={bem('Error')}>
+          {uploading.error}
+        </Typography>
+      )}
 
       <div className={bem('Info')}>
         <div>Login:</div>

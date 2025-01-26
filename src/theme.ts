@@ -58,7 +58,7 @@ theme.components = {
         '--secondary-color-light': theme.palette.secondary.light,
         '--black': '#400031',
         '--white': '#fff',
-        '--red': 'red',
+        '--error-color': 'red',
       },
     },
   },

@@ -2,15 +2,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-import { User } from 'models/UserModel'
-
-import { loginUser, restoreUser } from 'state/user/user.thunks'
+import { loginUser, restoreUser, uploadImage } from 'state/user/user.thunks'
 import { removeToken } from 'state/user/user.token'
+import { User } from 'models/UserModel'
 
 type UserState = {
   user?: User
   processes: {
     login: {
+      pending: boolean
+      error: string | null
+    }
+    uploadingImage: {
       pending: boolean
       error: string | null
     }
@@ -21,6 +24,10 @@ const initialState: UserState = {
   user: undefined,
   processes: {
     login: {
+      pending: false,
+      error: null,
+    },
+    uploadingImage: {
       pending: false,
       error: null,
     },
@@ -49,7 +56,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.processes.login.pending = false
-        state.processes.login.error = (action.payload as string) || 'Unknown error'
+        state.processes.login.error = action.payload as string
       })
       .addCase(restoreUser.pending, (state) => {
         state.processes.login.pending = true
@@ -61,6 +68,17 @@ const userSlice = createSlice({
       })
       .addCase(restoreUser.rejected, (state, action) => {
         state.processes.login.pending = false
+      })
+      .addCase(uploadImage.pending, (state) => {
+        state.processes.uploadingImage.pending = true
+        state.processes.uploadingImage.error = null
+      })
+      .addCase(uploadImage.fulfilled, (state) => {
+        state.processes.uploadingImage.pending = false
+      })
+      .addCase(uploadImage.rejected, (state, action) => {
+        state.processes.uploadingImage.pending = false
+        state.processes.uploadingImage.error = action.payload as string
       })
   },
 })

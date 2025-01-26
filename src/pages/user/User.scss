@@ -30,6 +30,13 @@
     }
   }
 
+  &-AvatarImage {
+    margin: auto;
+    transform: scale(3);
+    position: relative;
+    bottom: 40px;
+  }
+
   &-Info {
     display: grid;
     gap: 1rem;
@@ -41,5 +48,11 @@
       // font-weight: bold;
       color: var(--primary-color);
     }
+  }
+
+  &-Error {
+    color: var(--error-color);
+    font-size: 1.5rem;
+    margin: 1rem 0;
   }
 }

@@ -13,3 +13,8 @@ export const loginProcessSelector = createSelector(
   selectUserSlice,
   (userState) => userState.processes.login,
 )
+
+export const uploadingImageProcessSelector = createSelector(
+  selectUserSlice,
+  (userState) => userState.processes.uploadingImage,
+)

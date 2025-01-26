@@ -45,3 +45,23 @@ export const getUserData = async (token: string): Promise<User> => {
     }
   }
 }
+
+export const uploadImage = async (token: string, image: File): Promise<void> => {
+  const formData = new FormData()
+  formData.append('file', image)
+
+  try {
+    await axios.post(`${API}/organisations/avatar`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      throw new Error(error.response?.data?.message || 'An unknown error occurred')
+    } else {
+      throw new Error('An unknown error occurred')
+    }
+  }
+}

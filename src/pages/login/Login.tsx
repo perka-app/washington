@@ -7,7 +7,7 @@ import { loginProcessSelector } from 'state/user/user.selector'
 import { AppDispatch } from 'state/store'
 import { loginUser } from 'state/user/user.thunks'
 
-import { Board } from 'components/perka/Board'
+import { Board } from 'components/board'
 
 import './Login.scss'
 
@@ -72,7 +72,7 @@ export const Login: React.FC = () => {
         >
           Login
         </Button>
-        {/* Error message: */}
+
         {!loginProcess.pending && loginProcess.error && (
           <Typography variant="h6" className={bem('Error')}>
             {loginProcess.error}
