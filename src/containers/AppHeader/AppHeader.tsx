@@ -38,7 +38,12 @@ export const AppHeader: React.FC = () => {
 
           <Tooltip title="Open user settings">
             {user.avatarUrl ? (
-              <Avatar alt="avatar" className={bem('UserButton')} src={user.avatarUrl} />
+              <Avatar
+                alt="avatar"
+                className={bem('UserButton')}
+                src={user.avatarUrl}
+                onClick={openUserPage}
+              />
             ) : (
               <UserButton className={bem('UserButton')} onClick={openUserPage} />
             )}

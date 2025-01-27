@@ -81,9 +81,10 @@ const userSlice = createSlice({
         state.processes.uploadingImage.pending = true
         state.processes.uploadingImage.error = null
       })
-      .addCase(uploadImage.fulfilled, (state) => {
+      .addCase(uploadImage.fulfilled, (state, action) => {
         state.processes.uploadingImage.pending = false
         state.processes.uploadingImage.error = null
+        state.user = { ...state.user, avatarUrl: action.payload } as User
       })
       .addCase(uploadImage.rejected, (state, action) => {
         state.processes.uploadingImage.pending = false
@@ -93,9 +94,10 @@ const userSlice = createSlice({
         state.processes.uploadingUserData.pending = true
         state.processes.uploadingUserData.error = null
       })
-      .addCase(saveUserData.fulfilled, (state) => {
+      .addCase(saveUserData.fulfilled, (state, action) => {
         state.processes.uploadingUserData.pending = false
         state.processes.uploadingUserData.error = null
+        state.user = action.payload
       })
       .addCase(saveUserData.rejected, (state, action) => {
         state.processes.uploadingUserData.pending = false

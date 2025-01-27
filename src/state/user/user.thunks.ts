@@ -51,9 +51,7 @@ export const uploadImage = createAsyncThunk(
         return rejectWithValue('No token found')
       }
 
-      await userApi.uploadImage(token, image)
-
-      window.location.reload()
+      return await userApi.uploadImage(token, image)
     } catch (e: unknown) {
       return rejectWithValue(e instanceof Error ? e.message : 'Unknown error')
     }
@@ -72,7 +70,7 @@ export const saveUserData = createAsyncThunk(
 
       await userApi.saveUserData(token, user)
 
-      window.location.reload()
+      return user
     } catch (e: unknown) {
       return rejectWithValue(e instanceof Error ? e.message : 'Unknown error')
     }

@@ -46,17 +46,19 @@ export const getUserData = async (token: string): Promise<User> => {
   }
 }
 
-export const uploadImage = async (token: string, image: File): Promise<void> => {
+export const uploadImage = async (token: string, image: File): Promise<string> => {
   const formData = new FormData()
   formData.append('file', image)
 
   try {
-    await axios.post(`${API}/organisations/avatar`, formData, {
+    const response = await axios.post(`${API}/organisations/avatar`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
       },
     })
+
+    return response.data.url
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
       throw new Error(error.response?.data?.message || 'An unknown error occurred')
@@ -67,8 +69,11 @@ export const uploadImage = async (token: string, image: File): Promise<void> => 
 }
 
 export const saveUserData = async (token: string, user: User): Promise<void> => {
+  type SaveUserDataDto = Pick<User, 'description'>
+  const saveUserDataDto: SaveUserDataDto = { description: user.description }
+
   try {
-    await axios.put(`${API}/organisations/data`, user, {
+    await axios.patch(`${API}/organisations/data`, saveUserDataDto, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',

@@ -1,6 +1,6 @@
 import { CloudUpload, Edit, Close } from '@mui/icons-material'
 import { useSelector, useDispatch } from 'react-redux'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { cn } from '@bem-react/classname'
 import {
   Avatar,
@@ -42,7 +42,7 @@ export const UserPage: React.FC = () => {
   const [isDescriptionValid, setIsDescriptionValid] = useState(false)
   const [descriptionError, setDescriptionError] = useState('')
 
-  const handleOpenEmail = () => setOpenEmail(true)
+  // const handleOpenEmail = () => setOpenEmail(true)
   const handleCloseEmail = () => setOpenEmail(false)
   const handleOpenDesc = () => setOpenDesc(true)
   const handleCloseDesc = () => setOpenDesc(false)
@@ -82,6 +82,11 @@ export const UserPage: React.FC = () => {
     dispatch(uploadImage(image))
   }
 
+  useEffect(() => {
+    setOpenEmail(false)
+    setOpenDesc(false)
+  }, [user])
+
   return (
     <div className={bem()}>
       <div className={bem('Avatar')}>
@@ -99,7 +104,6 @@ export const UserPage: React.FC = () => {
           startIcon={<CloudUpload />}
           variant="contained"
           role={undefined}
-          fullWidth
         >
           Upload avatar image
           <HiddenInput
@@ -123,11 +127,14 @@ export const UserPage: React.FC = () => {
         <div>Email:</div>
         <div className={bem('Value')}>
           <div className={bem('Text')}>{user?.email}</div>
-          <Tooltip title="Edit email">
-            <IconButton className={bem('IconButton')} onClick={handleOpenEmail}>
+          {/* <Tooltip title="Edit email">
+            <IconButton
+              className={bem('IconButton')}
+              onClick={handleOpenEmail}
+            >
               <Edit />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
         </div>
         <div>Description:</div>
         <div className={bem('Value')}>
