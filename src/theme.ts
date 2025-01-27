@@ -37,6 +37,8 @@ theme.components = {
       root: {
         borderRadius: '30px',
         height: '50px',
+        margin: '0 1rem',
+        padding: '0 1.5rem',
       },
     },
   },
@@ -44,6 +46,17 @@ theme.components = {
     styleOverrides: {
       root: {
         borderRadius: '30px',
+      },
+    },
+  },
+  MuiIconButton: {
+    styleOverrides: {
+      root: {
+        color: theme.palette.primary.main,
+        '&:hover': {
+          color: theme.palette.primary.light,
+          backgroundColor: 'transparent', // Remove hover background
+        },
       },
     },
   },

@@ -67,7 +67,7 @@ export const Login: React.FC = () => {
           variant="contained"
           color="primary"
           fullWidth
-          style={{ marginTop: '20px' }}
+          style={{ margin: '1rem auto' }}
           disabled={loginProcess.pending}
         >
           Login
