@@ -14,17 +14,25 @@ import {
   TextareaAutosize,
 } from '@mui/material'
 
+import {
+  saveUserData,
+  uploadImage,
+  uploadingImageProcessSelector,
+  uploadingUserDataProcessSelector,
+  userSelector,
+} from 'state/user'
+import { User } from 'models/UserModel'
 import { AppDispatch } from 'state/store'
 import { HiddenInput } from 'components/HidenInput'
 import { ReactComponent as UserImage } from 'assets/buttons/user.svg'
-import { uploadImage, uploadingImageProcessSelector, userSelector } from 'state/user'
 
 import './User.scss'
 
-export const User: React.FC = () => {
+export const UserPage: React.FC = () => {
   const bem = cn('User')
   const user = useSelector(userSelector)
   const uploading = useSelector(uploadingImageProcessSelector)
+  const saving = useSelector(uploadingUserDataProcessSelector)
   const dispatch = useDispatch<AppDispatch>()
   const [openEmail, setOpenEmail] = useState(false)
   const [openDesc, setOpenDesc] = useState(false)
@@ -63,6 +71,8 @@ export const User: React.FC = () => {
     }
   }
 
+  const handleSaveEmail = () => dispatch(saveUserData({ ...user, email } as User))
+  const handleSaveDesc = () => dispatch(saveUserData({ ...user, description } as User))
   const handleUpload = (image?: File) => {
     if (!image) {
       alert('Please select an image first!')
@@ -145,9 +155,18 @@ export const User: React.FC = () => {
           </Typography>
           <Typography id="email-modal-desc" variant="h6" className={bem('ModalContent')}>
             <Input placeholder="Email" value={email} onChange={handleEmailChange} />
-            <Button variant="contained" disabled={!isEmailValid}>
+            <Button
+              loading={saving.pending}
+              loadingPosition="start"
+              variant="contained"
+              disabled={!isEmailValid}
+              onClick={handleSaveEmail}
+            >
               Save
             </Button>
+            {saving.error && (
+              <Typography className={bem('ModalError')}>{saving.error}</Typography>
+            )}
           </Typography>
         </Box>
       </Modal>
@@ -173,11 +192,20 @@ export const User: React.FC = () => {
               value={description}
               onChange={handleDescriptionChange}
             />
-            <Button variant="contained" disabled={!isDescriptionValid}>
+            <Button
+              loading={saving.pending}
+              loadingPosition="start"
+              variant="contained"
+              disabled={!isDescriptionValid}
+              onClick={handleSaveDesc}
+            >
               Save
             </Button>
             {descriptionError && (
               <Typography className={bem('ModalError')}>{descriptionError}</Typography>
+            )}
+            {saving.error && (
+              <Typography className={bem('ModalError')}>{saving.error}</Typography>
             )}
           </Typography>
         </Box>

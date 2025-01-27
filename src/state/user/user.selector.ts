@@ -18,3 +18,8 @@ export const uploadingImageProcessSelector = createSelector(
   selectUserSlice,
   (userState) => userState.processes.uploadingImage,
 )
+
+export const uploadingUserDataProcessSelector = createSelector(
+  selectUserSlice,
+  (userState) => userState.processes.uploadingUserData,
+)

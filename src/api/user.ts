@@ -65,3 +65,20 @@ export const uploadImage = async (token: string, image: File): Promise<void> => 
     }
   }
 }
+
+export const saveUserData = async (token: string, user: User): Promise<void> => {
+  try {
+    await axios.put(`${API}/organisations/data`, user, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    })
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      throw new Error(error.response?.data?.message || 'An unknown error occurred')
+    } else {
+      throw new Error('An unknown error occurred')
+    }
+  }
+}

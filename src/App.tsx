@@ -7,7 +7,7 @@ import { Communication } from 'pages/communication/Communication'
 import { Dashboard } from 'pages/dashboard/Dashboard'
 import { AppHeader } from 'containers/AppHeader/AppHeader'
 import { Login } from 'pages/login/Login'
-import { User } from 'pages/user/User'
+import { UserPage } from 'pages/user/User'
 
 import 'App.scss'
 
@@ -31,7 +31,7 @@ export const App: React.FC = () => {
           <Routes>
             <Route index element={<AuthGuard comp={<Dashboard />} />}></Route>
 
-            <Route path="/user" element={<AuthGuard comp={<User />} />} />
+            <Route path="/user" element={<AuthGuard comp={<UserPage />} />} />
 
             <Route
               path="/communication"

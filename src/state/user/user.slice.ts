@@ -2,7 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-import { loginUser, restoreUser, uploadImage } from 'state/user/user.thunks'
+import { loginUser, restoreUser, saveUserData, uploadImage } from 'state/user/user.thunks'
 import { removeToken } from 'state/user/user.token'
 import { User } from 'models/UserModel'
 
@@ -17,6 +17,10 @@ type UserState = {
       pending: boolean
       error: string | null
     }
+    uploadingUserData: {
+      pending: boolean
+      error: string | null
+    }
   }
 }
 
@@ -28,6 +32,10 @@ const initialState: UserState = {
       error: null,
     },
     uploadingImage: {
+      pending: false,
+      error: null,
+    },
+    uploadingUserData: {
       pending: false,
       error: null,
     },
@@ -66,7 +74,7 @@ const userSlice = createSlice({
         state.processes.login.pending = false
         state.user = action.payload
       })
-      .addCase(restoreUser.rejected, (state, action) => {
+      .addCase(restoreUser.rejected, (state) => {
         state.processes.login.pending = false
       })
       .addCase(uploadImage.pending, (state) => {
@@ -75,10 +83,23 @@ const userSlice = createSlice({
       })
       .addCase(uploadImage.fulfilled, (state) => {
         state.processes.uploadingImage.pending = false
+        state.processes.uploadingImage.error = null
       })
       .addCase(uploadImage.rejected, (state, action) => {
         state.processes.uploadingImage.pending = false
         state.processes.uploadingImage.error = action.payload as string
+      })
+      .addCase(saveUserData.pending, (state) => {
+        state.processes.uploadingUserData.pending = true
+        state.processes.uploadingUserData.error = null
+      })
+      .addCase(saveUserData.fulfilled, (state) => {
+        state.processes.uploadingUserData.pending = false
+        state.processes.uploadingUserData.error = null
+      })
+      .addCase(saveUserData.rejected, (state, action) => {
+        state.processes.uploadingUserData.pending = false
+        state.processes.uploadingUserData.error = action.payload as string
       })
   },
 })
