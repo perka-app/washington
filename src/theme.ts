@@ -1,6 +1,12 @@
 /* eslint-disable immutable/no-mutation */
 import { createTheme } from '@mui/material'
 
+declare module '@mui/material/Button' {
+  interface ButtonPropsVariantOverrides {
+    navigation: true // Add your custom variant
+  }
+}
+
 export const theme = createTheme({
   typography: {
     fontFamily: 'Inter, Roboto, sans-serif',
@@ -40,7 +46,23 @@ theme.components = {
         margin: '0 1rem',
         padding: '0 1.5rem',
       },
+      sizeSmall: {
+        borderRadius: '20px',
+        height: '20px',
+        fontSize: '0.75rem',
+        padding: '4px 8px',
+        minWidth: 'unset', // Allow it to be as small as needed
+        textTransform: 'none', // Optional: Disable uppercase text
+      },
     },
+    variants: [
+      {
+        props: { variant: 'navigation' },
+        style: {
+          //test
+        },
+      },
+    ],
   },
   MuiOutlinedInput: {
     styleOverrides: {

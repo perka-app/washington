@@ -43,7 +43,9 @@ export const AppHeader: React.FC = () => {
                 className={bem('UserButton')}
                 src={user.avatarUrl}
                 onClick={openUserPage}
-              />
+              >
+                {user.name[0]}
+              </Avatar>
             ) : (
               <UserButton className={bem('UserButton')} onClick={openUserPage} />
             )}
