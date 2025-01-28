@@ -46,10 +46,13 @@ export const UserPage: React.FC = () => {
   const [descriptionError, setDescriptionError] = useState('')
   const [isDescriptionValid, setIsDescriptionValid] = useState(false)
 
-  // const handleOpenEmail = () => setOpenEmail(true)
-  const handleCloseEmail = () => setOpenEmail(false)
-  const handleOpenDesc = () => setOpenDesc(true)
+  const handleOpenDesc = () => {
+    setDescription(user?.description || '')
+    setOpenDesc(true)
+  }
   const handleCloseDesc = () => setOpenDesc(false)
+  const handleCloseEmail = () => setOpenEmail(false)
+  // const handleOpenEmail = () => setOpenEmail(true)
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
@@ -209,6 +212,7 @@ export const UserPage: React.FC = () => {
             <TextareaAutosize
               className={bem('ModalTextarea')}
               minRows={5}
+              maxRows={15}
               placeholder="Description"
               value={description}
               onChange={handleDescriptionChange}
