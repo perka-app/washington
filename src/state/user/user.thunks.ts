@@ -4,7 +4,7 @@ import { LoginCredentials } from 'models/LoginCredentials'
 
 import { userApi } from 'api'
 import { getToken, saveToken } from 'state/user/user.token'
-import { User } from 'models/UserModel'
+import { User } from 'models/User'
 
 export const loginUser = createAsyncThunk(
   'user/login',

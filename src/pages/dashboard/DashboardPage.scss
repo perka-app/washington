@@ -1,0 +1,13 @@
+@import '../../mixins/page.scss';
+
+.Dashboard {
+  @include page();
+
+  &-GoToDashboard {
+    @include page_navigation__left();
+  }
+
+  &-GoToMessages {
+    @include page_navigation__right();
+  }
+}

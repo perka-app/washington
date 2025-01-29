@@ -4,7 +4,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 import { loginUser, restoreUser, saveUserData, uploadImage } from 'state/user/user.thunks'
 import { removeToken } from 'state/user/user.token'
-import { User } from 'models/UserModel'
+import { User } from 'models/User'
 
 type UserState = {
   user?: User
@@ -107,5 +107,4 @@ const userSlice = createSlice({
 })
 
 export const userActions = userSlice.actions
-
 export const userReducer = userSlice.reducer
