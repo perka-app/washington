@@ -1,6 +1,6 @@
 @import '../../mixins/page.scss';
 
-.Dashboard {
+.DashboardPage {
   @include page();
 
   &-GoToDashboard {
@@ -9,5 +9,9 @@
 
   &-GoToMessages {
     @include page_navigation__right();
+  }
+
+  &-Content {
+    width: 100%;
   }
 }

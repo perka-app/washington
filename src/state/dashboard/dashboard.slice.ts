@@ -35,6 +35,14 @@ const dashboardSlice = createSlice({
       state.processes.fetchingData.pending = true
       state.processes.fetchingData.error = null
     },
+    fetchDataSuccess: (state, action) => {
+      state.data = action.payload
+      state.processes.fetchingData.pending = false
+    },
+    fetchDataError: (state, action) => {
+      state.processes.fetchingData.pending = false
+      state.processes.fetchingData.error = action.payload || 'Failed to fetch data'
+    },
   },
 })
 

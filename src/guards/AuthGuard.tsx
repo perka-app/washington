@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 
-import { isAuthorizedSelector } from 'state/user/user.selector'
+import { isAuthorizedSelector } from 'state/user/user.selectors'
 
 export const AuthGuard = ({ comp }: { comp: ReactNode }) => {
   const navigate = useNavigate()

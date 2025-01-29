@@ -1,11 +1,17 @@
+/* eslint-disable immutable/no-mutation */
 import { Store } from 'redux'
-import axios, { Axios } from 'axios-observable'
+import Axios from 'axios-observable'
 import { AxiosRequestConfig } from 'axios'
 
 import { authInterceptor } from 'api/interceptors/auth'
 
 import { RootState } from 'state/store'
 
+const baseURL = process.env.REACT_APP_API_URL
+  ? `https://${process.env.REACT_APP_API_URL}`
+  : 'http://localhost:3000'
+
+// eslint-disable-next-line immutable/no-let
 let instance: Axios | null = null
 
 export interface RequestConfig extends AxiosRequestConfig {
@@ -24,7 +30,9 @@ export const setupInterceptors = (axi: Axios, store: Store<RootState>): void => 
 
 export const http = (): Axios => {
   if (!instance) {
-    instance = axios.create({})
+    instance = Axios.create({
+      baseURL,
+    })
   }
 
   return instance

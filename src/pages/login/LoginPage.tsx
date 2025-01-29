@@ -3,7 +3,7 @@ import { cn } from '@bem-react/classname'
 import { useDispatch, useSelector } from 'react-redux'
 import { TextField, Button, Typography } from '@mui/material'
 
-import { loginProcessSelector } from 'state/user/user.selector'
+import { loginProcessSelector } from 'state/user/user.selectors'
 import { AppDispatch } from 'state/store'
 import { loginUser } from 'state/user/user.thunks'
 
