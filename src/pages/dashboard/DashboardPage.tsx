@@ -1,5 +1,5 @@
 /* eslint-disable immutable/no-let */
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, CircularProgress } from '@mui/material'
 import { cn } from '@bem-react/classname'
@@ -22,7 +22,6 @@ import {
 } from 'state/dashboard/dashboard.selectors'
 import { DebugInfo } from 'components'
 import { AppDispatch } from 'state/store'
-// import { userSelector } from 'state/user'
 import { ClientRecord } from 'models'
 import { dashboardActions as actions } from 'state/dashboard'
 
@@ -31,7 +30,6 @@ import './DashboardPage.scss'
 export const DashboardPage: React.FC = () => {
   const bem = cn('DashboardPage')
   const dataSource = useSelector(dataSelector)
-  // const user = useSelector(userSelector)
   const error = useSelector(errorSelector)
   const loading = useSelector(loadingSelector)
   const dispatch = useDispatch<AppDispatch>()
@@ -45,6 +43,34 @@ export const DashboardPage: React.FC = () => {
 
   dayjs.extend(isoWeek)
 
+  const processData = useCallback(
+    (timeFrame: Timeframe, clientsRecords: ClientRecord[]) => {
+      let groupedData: Record<string, number> = {}
+
+      clientsRecords.forEach((client) => {
+        const date = dayjs(client.joinedAt)
+        let key: string
+
+        if (timeFrame === 'daily') {
+          key = date.format('YYYY-MM-DD') // e.g., "2025-01-29"
+        } else if (timeFrame === 'weekly') {
+          key = `Week ${date.isoWeek()} (${date.year()})` // e.g., "Week 4 (2025)"
+        } else {
+          key = date.format('YYYY-MM') // e.g., "2025-01"
+        }
+
+        // eslint-disable-next-line immutable/no-mutation
+        groupedData[key] = (groupedData[key] || 0) + 1
+      })
+
+      return Object.entries(groupedData).map(([name, clients]) => ({
+        name,
+        clients: clients as number,
+      }))
+    },
+    [],
+  )
+
   useEffect(() => {
     setRenderCount((prevCount) => prevCount + 1)
   }, [])
@@ -56,32 +82,7 @@ export const DashboardPage: React.FC = () => {
   useEffect(() => {
     setData(processData(timeFrame, dataSource?.clientsRecords || []))
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  }, [timeFrame, dataSource])
-
-  const processData = (timeFrame: Timeframe, clientsRecords: ClientRecord[]) => {
-    let groupedData: Record<string, number> = {}
-
-    clientsRecords.forEach((client) => {
-      const date = dayjs(client.joinedAt)
-      let key: string
-
-      if (timeFrame === 'daily') {
-        key = date.format('YYYY-MM-DD') // e.g., "2025-01-29"
-      } else if (timeFrame === 'weekly') {
-        key = `Week ${date.isoWeek()} (${date.year()})` // e.g., "Week 4 (2025)"
-      } else {
-        key = date.format('YYYY-MM') // e.g., "2025-01"
-      }
-
-      // eslint-disable-next-line immutable/no-mutation
-      groupedData[key] = (groupedData[key] || 0) + 1
-    })
-
-    return Object.entries(groupedData).map(([name, clients]) => ({
-      name,
-      clients: clients as number,
-    }))
-  }
+  }, [timeFrame, dataSource, processData])
 
   return (
     <div className={bem()}>
