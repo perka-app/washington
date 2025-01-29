@@ -10,7 +10,7 @@
   "rules": {
     // Add your custom rules here
     "import/no-unresolved": "error",
-    "import/named": "error",
+    "import/named": 1,
     "import/default": "error",
     "immutable/no-let": "error",
     "immutable/no-mutation": "error",

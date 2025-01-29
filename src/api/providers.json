@@ -1,0 +1,6 @@
+{
+  "london": {
+    "authHeader": "Authorization",
+    "authValue": "Bearer"
+  }
+}

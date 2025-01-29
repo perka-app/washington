@@ -2,15 +2,22 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-import { User } from 'models/UserModel'
-
-import { loginUser, restoreUser } from 'state/user/user.thunks'
+import { loginUser, restoreUser, saveUserData, uploadImage } from 'state/user/user.thunks'
 import { removeToken } from 'state/user/user.token'
+import { User } from 'models/UserModel'
 
 type UserState = {
   user?: User
   processes: {
     login: {
+      pending: boolean
+      error: string | null
+    }
+    uploadingImage: {
+      pending: boolean
+      error: string | null
+    }
+    uploadingUserData: {
       pending: boolean
       error: string | null
     }
@@ -21,6 +28,14 @@ const initialState: UserState = {
   user: undefined,
   processes: {
     login: {
+      pending: false,
+      error: null,
+    },
+    uploadingImage: {
+      pending: false,
+      error: null,
+    },
+    uploadingUserData: {
       pending: false,
       error: null,
     },
@@ -49,7 +64,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.processes.login.pending = false
-        state.processes.login.error = (action.payload as string) || 'Unknown error'
+        state.processes.login.error = action.payload as string
       })
       .addCase(restoreUser.pending, (state) => {
         state.processes.login.pending = true
@@ -59,8 +74,34 @@ const userSlice = createSlice({
         state.processes.login.pending = false
         state.user = action.payload
       })
-      .addCase(restoreUser.rejected, (state, action) => {
+      .addCase(restoreUser.rejected, (state) => {
         state.processes.login.pending = false
+      })
+      .addCase(uploadImage.pending, (state) => {
+        state.processes.uploadingImage.pending = true
+        state.processes.uploadingImage.error = null
+      })
+      .addCase(uploadImage.fulfilled, (state, action) => {
+        state.processes.uploadingImage.pending = false
+        state.processes.uploadingImage.error = null
+        state.user = { ...state.user, avatarUrl: action.payload } as User
+      })
+      .addCase(uploadImage.rejected, (state, action) => {
+        state.processes.uploadingImage.pending = false
+        state.processes.uploadingImage.error = action.payload as string
+      })
+      .addCase(saveUserData.pending, (state) => {
+        state.processes.uploadingUserData.pending = true
+        state.processes.uploadingUserData.error = null
+      })
+      .addCase(saveUserData.fulfilled, (state, action) => {
+        state.processes.uploadingUserData.pending = false
+        state.processes.uploadingUserData.error = null
+        state.user = action.payload
+      })
+      .addCase(saveUserData.rejected, (state, action) => {
+        state.processes.uploadingUserData.pending = false
+        state.processes.uploadingUserData.error = action.payload as string
       })
   },
 })

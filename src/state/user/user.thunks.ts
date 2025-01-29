@@ -4,6 +4,7 @@ import { LoginCredentials } from 'models/LoginCredentials'
 
 import { userApi } from 'api'
 import { getToken, saveToken } from 'state/user/user.token'
+import { User } from 'models/UserModel'
 
 export const loginUser = createAsyncThunk(
   'user/login',
@@ -27,13 +28,49 @@ export const restoreUser = createAsyncThunk(
     try {
       const token = getToken()
 
-      if (token) {
-        const user = await userApi.getUserData(token)
-
-        return user
-      } else {
+      if (!token) {
         return rejectWithValue('No token found')
       }
+
+      const user = await userApi.getUserData(token)
+
+      return user
+    } catch (e: unknown) {
+      return rejectWithValue(e instanceof Error ? e.message : 'Unknown error')
+    }
+  },
+)
+
+export const uploadImage = createAsyncThunk(
+  'user/uploadImage',
+  async (image: File, { rejectWithValue }) => {
+    try {
+      const token = getToken()
+
+      if (!token) {
+        return rejectWithValue('No token found')
+      }
+
+      return await userApi.uploadImage(token, image)
+    } catch (e: unknown) {
+      return rejectWithValue(e instanceof Error ? e.message : 'Unknown error')
+    }
+  },
+)
+
+export const saveUserData = createAsyncThunk(
+  'user/saveUserData',
+  async (user: User, { rejectWithValue }) => {
+    try {
+      const token = getToken()
+
+      if (!token) {
+        return rejectWithValue('No token found')
+      }
+
+      await userApi.saveUserData(token, user)
+
+      return user
     } catch (e: unknown) {
       return rejectWithValue(e instanceof Error ? e.message : 'Unknown error')
     }

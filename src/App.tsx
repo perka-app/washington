@@ -6,8 +6,8 @@ import { AuthGuard, UnAuthGuard } from 'guards'
 import { Communication } from 'pages/communication/Communication'
 import { Dashboard } from 'pages/dashboard/Dashboard'
 import { AppHeader } from 'containers/AppHeader/AppHeader'
-import { Login } from 'pages/login/Login'
-import { User } from 'pages/user/User'
+import { LoginPage } from 'pages/login/LoginPage'
+import { UserPage } from 'pages/user/UserPage'
 
 import 'App.scss'
 
@@ -31,14 +31,14 @@ export const App: React.FC = () => {
           <Routes>
             <Route index element={<AuthGuard comp={<Dashboard />} />}></Route>
 
-            <Route path="/user" element={<AuthGuard comp={<User />} />} />
+            <Route path="/user" element={<AuthGuard comp={<UserPage />} />} />
 
             <Route
               path="/communication"
               element={<AuthGuard comp={<Communication />} />}
             />
 
-            <Route path="/login" element={<UnAuthGuard comp={<Login />} />} />
+            <Route path="/login" element={<UnAuthGuard comp={<LoginPage />} />} />
 
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>

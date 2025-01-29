@@ -1,6 +1,12 @@
 /* eslint-disable immutable/no-mutation */
 import { createTheme } from '@mui/material'
 
+declare module '@mui/material/Button' {
+  interface ButtonPropsVariantOverrides {
+    navigation: true // Add your custom variant
+  }
+}
+
 export const theme = createTheme({
   typography: {
     fontFamily: 'Inter, Roboto, sans-serif',
@@ -37,13 +43,42 @@ theme.components = {
       root: {
         borderRadius: '30px',
         height: '50px',
+        margin: '0 1rem',
+        padding: '0 1.5rem',
+      },
+      sizeSmall: {
+        borderRadius: '20px',
+        height: '20px',
+        fontSize: '0.75rem',
+        padding: '4px 8px',
+        minWidth: 'unset', // Allow it to be as small as needed
+        textTransform: 'none', // Optional: Disable uppercase text
       },
     },
+    variants: [
+      {
+        props: { variant: 'navigation' },
+        style: {
+          //test
+        },
+      },
+    ],
   },
   MuiOutlinedInput: {
     styleOverrides: {
       root: {
         borderRadius: '30px',
+      },
+    },
+  },
+  MuiIconButton: {
+    styleOverrides: {
+      root: {
+        color: theme.palette.primary.main,
+        '&:hover': {
+          color: theme.palette.primary.light,
+          backgroundColor: 'transparent', // Remove hover background
+        },
       },
     },
   },
@@ -56,6 +91,9 @@ theme.components = {
         '--secondary-color': theme.palette.secondary.main,
         '--secondary-color-dark': theme.palette.secondary.dark,
         '--secondary-color-light': theme.palette.secondary.light,
+        '--black': '#400031',
+        '--white': '#fff',
+        '--error-color': 'red',
       },
     },
   },
