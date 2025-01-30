@@ -27,7 +27,7 @@ export const DashboardPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
 
   const [renderCount, setRenderCount] = useState<number>(0)
-  const [timeFrame, setTimeFrame] = useState<Timeframe>('monthly')
+  const [timeFrame, setTimeFrame] = useState<Timeframe>('daily')
   const [data, setData] = useState<DataItem[]>([])
 
   type Timeframe = 'daily' | 'weekly' | 'monthly'
