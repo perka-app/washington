@@ -13,9 +13,6 @@ export const authInterceptor =
     const { context } = request as RequestConfig
     const providers = providersData as Providers
     const authHeaders: Record<string, string> = {}
-
-    console.log(store.getState())
-
     const provider: Provider = providers[context?.provider || 'london']
 
     if (!provider || !provider.authHeader || !provider.authValue) {

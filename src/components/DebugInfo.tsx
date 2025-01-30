@@ -6,8 +6,8 @@ type DebugInfoProps = {
 
 export const DebugInfo: React.FC<DebugInfoProps> = ({ info }) => {
   return (
-    <div style={{ position: 'fixed', bottom: '10px', left: '20px' }}>
-      <p>Debug info: {info}</p>
+    <div style={{ position: 'fixed', bottom: '10px', left: '40px' }}>
+      <p style={{ fontSize: 'small' }}>Debug info: {info}</p>
     </div>
   )
 }

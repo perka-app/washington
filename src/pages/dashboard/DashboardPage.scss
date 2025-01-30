@@ -14,4 +14,49 @@
   &-Content {
     width: 100%;
   }
+
+  &-Header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    position: relative;
+    top: -30px;
+  }
+
+  &-Clients,
+  &-Increase {
+    margin: 0 2rem;
+  }
+
+  &-ClientsTitle {
+    margin-bottom: 0;
+  }
+
+  &-ClientsCount,
+  &-IncreaseCount {
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+  }
+
+  &-Buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  &-Button {
+    &:hover {
+      color: var(--primary-color-light) !important;
+    }
+    &_Active {
+      color: var(--primary-color-light) !important;
+      text-decoration: underline !important;
+      text-underline-offset: 4px;
+    }
+  }
+
+  &-Chart {
+    margin-bottom: 5rem;
+  }
 }
