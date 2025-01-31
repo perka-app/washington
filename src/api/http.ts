@@ -3,7 +3,7 @@ import { Store } from 'redux'
 import Axios from 'axios-observable'
 import { AxiosRequestConfig } from 'axios'
 
-import { authInterceptor } from 'api/interceptors/auth'
+import { authInterceptor } from 'api/interceptors/auth.interceptor'
 
 import { RootState } from 'state/store'
 
