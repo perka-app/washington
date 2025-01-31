@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from 'react-router'
 
 import { AuthGuard, UnAuthGuard } from 'guards'
 import { Communication } from 'pages/communication/Communication'
-import { Dashboard } from 'pages/dashboard/Dashboard'
+import { DashboardPage } from 'pages/dashboard/DashboardPage'
 import { AppHeader } from 'containers/AppHeader/AppHeader'
 import { LoginPage } from 'pages/login/LoginPage'
 import { UserPage } from 'pages/user/UserPage'
@@ -29,7 +29,7 @@ export const App: React.FC = () => {
 
         <div className="App-Content">
           <Routes>
-            <Route index element={<AuthGuard comp={<Dashboard />} />}></Route>
+            <Route index element={<AuthGuard comp={<DashboardPage />} />}></Route>
 
             <Route path="/user" element={<AuthGuard comp={<UserPage />} />} />
 

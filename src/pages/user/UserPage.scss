@@ -1,20 +1,14 @@
+@import '../../mixins/page.scss';
+
 .User {
-  align-items: center;
-  border: var(--black) solid 4px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: auto;
-  max-width: 1000px;
-  min-width: 650px;
-  padding: 100px 75px;
-  position: relative;
+  @include page();
 
   &-GoToDashboard {
-    position: absolute !important;
-    left: -5px;
-    top: -60px;
+    @include page_navigation__left();
+  }
+
+  &-GoToMessages {
+    @include page_navigation__right();
   }
 
   &-Avatar {

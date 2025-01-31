@@ -1,0 +1,28 @@
+// Page Layout
+@mixin page($min: 650px, $max: 1000px) {
+  align-items: center;
+  border: var(--black) solid 4px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  max-width: $max;
+  min-width: $min;
+  padding: 100px 75px;
+  position: relative;
+}
+
+// Left navigation
+@mixin page_navigation__left() {
+  position: absolute !important;
+  left: -5px;
+  top: -60px;
+}
+
+// Right navigation
+@mixin page_navigation__right() {
+  position: absolute !important;
+  right: -5px;
+  top: -60px;
+}
