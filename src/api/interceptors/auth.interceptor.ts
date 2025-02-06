@@ -13,25 +13,17 @@ export const authInterceptor =
     const { context } = request as RequestConfig
     const providers = providersData as Providers
     const authHeaders: Record<string, string> = {}
-
-    console.log(store.getState())
-
-    if (!context?.provider) {
-      return request
-    }
-
-    const provider: Provider = providers[context.provider]
+    const provider: Provider = providers[context?.provider || 'london']
 
     if (!provider || !provider.authHeader || !provider.authValue) {
       console.error('Provider not found or badly configured')
       return request
     }
 
-    if (provider.authValue.includes('Bearer')) {
-      authHeaders[provider.authHeader] = `Bearer ${getToken()}`
-    } else {
-      authHeaders[provider.authHeader] = provider.authValue
-    }
+    // eslint-disable-next-line immutable/no-mutation
+    authHeaders[provider.authHeader] = provider.authValue.includes('Bearer')
+      ? `Bearer ${getToken()}`
+      : provider.authValue
 
     return {
       ...request,
