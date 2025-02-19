@@ -12,9 +12,9 @@ import {
   errorSelector,
   loadingSelector,
 } from 'state/dashboard/dashboard.selectors'
-import { DebugInfo } from 'components'
+import { DebugInfo } from 'shared/components'
 import { AppDispatch } from 'state/store'
-import { ClientRecord } from 'models'
+import { ClientRecord } from 'shared/models'
 import { dashboardActions as actions } from 'state/dashboard'
 
 import './DashboardPage.scss'

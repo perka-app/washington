@@ -1,8 +1,8 @@
 import axios, { AxiosError } from 'axios'
 
-import { LoginCredentials } from 'models/LoginCredentials'
-import { LoginResponse } from 'models/LoginResponse'
-import { User } from 'models/User'
+import { LoginCredentials } from 'shared/models/LoginCredentials'
+import { LoginResponse } from 'shared/models/LoginResponse'
+import { User } from 'shared/models/User'
 
 const API = process.env.REACT_APP_API_URL
   ? `https://${process.env.REACT_APP_API_URL}`

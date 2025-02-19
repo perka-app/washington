@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import { LoginCredentials } from 'models/LoginCredentials'
+import { LoginCredentials } from 'shared/models/LoginCredentials'
 
 import { userApi } from 'api'
 import { getToken, saveToken } from 'state/user/user.token'
-import { User } from 'models/User'
+import { User } from 'shared/models/User'
 
 export const loginUser = createAsyncThunk(
   'user/login',

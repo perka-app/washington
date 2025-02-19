@@ -22,9 +22,9 @@ import {
   uploadingUserDataProcessSelector,
   userSelector,
 } from 'state/user'
-import { User } from 'models/User'
+import { User } from 'shared/models/User'
 import { AppDispatch } from 'state/store'
-import { HiddenInput } from 'components/HidenInput'
+import { HiddenInput } from 'shared/components/HidenInput'
 import { ReactComponent as UserImage } from 'assets/buttons/user.svg'
 
 import './UserPage.scss'
