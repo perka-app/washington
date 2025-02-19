@@ -33,7 +33,7 @@ export const App: React.FC = () => {
 
             <Route path="/user" element={<AuthGuard comp={<UserPage />} />} />
 
-            <Route path="/communication" element={<AuthGuard comp={<MessagePage />} />} />
+            <Route path="/message" element={<AuthGuard comp={<MessagePage />} />} />
 
             <Route path="/login" element={<UnAuthGuard comp={<LoginPage />} />} />
 

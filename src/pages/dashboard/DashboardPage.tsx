@@ -1,11 +1,11 @@
 /* eslint-disable immutable/no-let */
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import React, { useState, useEffect, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, CircularProgress } from '@mui/material'
-import { cn } from '@bem-react/classname'
-import isoWeek from 'dayjs/plugin/isoWeek'
 import dayjs, { Dayjs } from 'dayjs'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
+import isoWeek from 'dayjs/plugin/isoWeek'
+import { cn } from '@bem-react/classname'
 
 import {
   dataSelector,
@@ -18,6 +18,7 @@ import { ClientRecord } from 'shared/models'
 import { dashboardActions as actions } from 'state/dashboard'
 
 import './DashboardPage.scss'
+import { useNavigate } from 'react-router'
 
 export const DashboardPage: React.FC = () => {
   const bem = cn('DashboardPage')
@@ -25,6 +26,7 @@ export const DashboardPage: React.FC = () => {
   const error = useSelector(errorSelector)
   const loading = useSelector(loadingSelector)
   const dispatch = useDispatch<AppDispatch>()
+  const navigate = useNavigate()
 
   const [renderCount, setRenderCount] = useState<number>(0)
   const [timeFrame, setTimeFrame] = useState<Timeframe>('daily')
@@ -35,7 +37,7 @@ export const DashboardPage: React.FC = () => {
   type DayjsRecord = { joinedAt: Dayjs }
 
   dayjs.extend(isoWeek)
-
+  // #region Grahps helpers (TODO: move to separate file)
   const integerTickFormatter = (tick: number) => {
     return Number.isInteger(tick) ? tick.toString() : ''
   }
@@ -86,7 +88,7 @@ export const DashboardPage: React.FC = () => {
     },
     [],
   )
-
+  // #endregion
   useEffect(() => {
     setRenderCount((prevCount) => prevCount + 1)
   }, [])
@@ -102,6 +104,17 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <div className={bem()}>
+      <Button
+        className={bem('GoToMessages')}
+        onClick={() => navigate('/message')}
+        color="primary"
+        style={{ margin: '1rem auto' }}
+        variant="contained"
+        size="small"
+      >
+        Create message {'>'}
+      </Button>
+
       {dataSource?.clientsCount && (
         <div className={bem('Header')}>
           <div className={bem('Clients')}>
