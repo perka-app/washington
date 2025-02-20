@@ -2,16 +2,17 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable'
 import { configureStore } from '@reduxjs/toolkit'
 
 import { userReducer } from 'state/user'
-import { dashboardReducer } from 'state/dashboard'
-import { dashboardEpics } from 'state/dashboard/dashboard.epics'
+import { messageEpics, messageReducer } from 'state/message'
+import { dashboardReducer, dashboardEpics } from 'state/dashboard'
 
 const epicMiddleware = createEpicMiddleware()
-const epics = combineEpics(dashboardEpics)
+const epics = combineEpics(dashboardEpics, messageEpics)
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     dashboard: dashboardReducer,
+    message: messageReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(epicMiddleware),
 })
