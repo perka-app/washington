@@ -1,7 +1,7 @@
 /* eslint-disable immutable/no-mutation */
 import { createSlice } from '@reduxjs/toolkit'
 
-import { ClientRecord } from 'models'
+import { ClientRecord } from 'shared/models'
 
 type DashboardState = {
   data: {

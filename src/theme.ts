@@ -48,9 +48,9 @@ theme.components = {
       },
       sizeSmall: {
         borderRadius: '20px',
-        height: '20px',
+        height: '26px',
         fontSize: '0.75rem',
-        padding: '4px 8px',
+        padding: '4px 16px',
         minWidth: 'unset', // Allow it to be as small as needed
         textTransform: 'none', // Optional: Disable uppercase text
       },

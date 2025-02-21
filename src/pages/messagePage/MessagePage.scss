@@ -1,0 +1,20 @@
+.MessagePage {
+  &-TitleRow {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+
+  &-Title {
+    flex-grow: 1;
+  }
+
+  &-Submit {
+    margin-left: 10px;
+  }
+
+  &-Error {
+    background: red;
+    color: white;
+    font-size: 2rem;
+  }
+}

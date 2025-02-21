@@ -2,10 +2,10 @@ import React from 'react'
 import { cn } from '@bem-react/classname'
 import { Routes, Route, Navigate } from 'react-router'
 
-import { AuthGuard, UnAuthGuard } from 'guards'
-import { Communication } from 'pages/communication/Communication'
+import { AuthGuard, UnAuthGuard } from 'shared/guards'
+import { MessagePage } from 'pages/messagePage/MessagePage'
 import { DashboardPage } from 'pages/dashboard/DashboardPage'
-import { AppHeader } from 'containers/AppHeader/AppHeader'
+import { AppHeader } from 'shared/containers/AppHeader/AppHeader'
 import { LoginPage } from 'pages/login/LoginPage'
 import { UserPage } from 'pages/user/UserPage'
 
@@ -33,10 +33,7 @@ export const App: React.FC = () => {
 
             <Route path="/user" element={<AuthGuard comp={<UserPage />} />} />
 
-            <Route
-              path="/communication"
-              element={<AuthGuard comp={<Communication />} />}
-            />
+            <Route path="/message" element={<AuthGuard comp={<MessagePage />} />} />
 
             <Route path="/login" element={<UnAuthGuard comp={<LoginPage />} />} />
 
