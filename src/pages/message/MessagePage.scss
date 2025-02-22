@@ -1,0 +1,49 @@
+@import '../../shared/mixins/modal.scss';
+
+.MessagePage {
+  &-TitleRow {
+    display: flex;
+    margin-bottom: 1rem;
+  }
+
+  &-Title {
+    flex-grow: 1;
+  }
+
+  &-NextButton {
+    margin-left: 10px;
+  }
+
+  &-Error {
+    background: red;
+    color: white;
+    font-size: 2rem;
+  }
+
+  &-Modal {
+    @include modal(800px);
+  }
+
+  &-ModalPreview {
+    background-color: #fbebf4 !important;
+    padding: 1rem;
+  }
+
+  &-ModalContent {
+    @include modal-content();
+    max-width: 400px;
+  }
+
+  &-ModalClose {
+    @include modal-close();
+  }
+
+  &-ModalSwitch {
+    align-items: center;
+    margin: 1rem 0 -1rem;
+  }
+
+  &-ModalSubmit {
+    @include modal-submit();
+  }
+}
