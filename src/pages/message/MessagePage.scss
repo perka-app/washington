@@ -14,18 +14,19 @@
     margin-left: 10px;
   }
 
-  &-Error {
-    background: red;
-    color: white;
-    font-size: 2rem;
-  }
-
   &-Modal {
     @include modal(800px);
   }
 
+  &-ModalError {
+    @include modal-error();
+  }
+
+  &-ModalSuccess {
+    @include modal-success();
+  }
   &-ModalPreview {
-    background-color: #fbebf4 !important;
+    background-color: #1a226420 !important;
     padding: 1rem;
   }
 

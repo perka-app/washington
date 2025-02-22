@@ -1,24 +1,28 @@
 /* eslint-disable immutable/no-mutation */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { stat } from 'fs'
 
 type MessageState = {
-  message: string | null
   proccesses: {
     sendingMessage: {
       pending: boolean
       error: string | null
     }
   }
+  success: {
+    sentAt: string
+    reciversCount: number
+  } | null
 }
 
 const initialState: MessageState = {
-  message: null,
   proccesses: {
     sendingMessage: {
       pending: false,
       error: null,
     },
   },
+  success: null,
 }
 
 const messageSlice = createSlice({
@@ -36,13 +40,18 @@ const messageSlice = createSlice({
       state.proccesses.sendingMessage.pending = true
       state.proccesses.sendingMessage.error = null
     },
-    sendMessageSuccess: (state) => {
+    sendMessageSuccess: (
+      state,
+      action: PayloadAction<{ sentAt: string; reciversCount: number }>,
+    ) => {
       state.proccesses.sendingMessage.pending = false
+      state.success = action.payload
     },
     sendMessageError: (state, action) => {
       state.proccesses.sendingMessage.pending = false
       state.proccesses.sendingMessage.error = action.payload || 'Failed to send message'
     },
+    reset: () => initialState,
   },
 })
 

@@ -11,7 +11,10 @@ import { cn } from '@bem-react/classname'
 import { DebugInfo } from 'shared/components'
 import { AppDispatch } from 'state/store'
 import { messageActions } from 'state/message/message.slice'
-import { sendingMessageProcessSelector } from 'state/message/message.selectors'
+import {
+  messageSuccessSelector,
+  sendingMessageProcessSelector,
+} from 'state/message/message.selectors'
 
 import './MessagePage.scss'
 // eslint-enable max-lines
@@ -22,12 +25,15 @@ export const MessagePage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
   const editorRef = useRef<any>(null)
   const processing = useSelector(sendingMessageProcessSelector)
+  const success = useSelector(messageSuccessSelector)
 
   const [modalChecked, setModalChecked] = useState(false)
   const [renderCount, setRenderCount] = useState<number>(0)
   const [modalShown, setModalShown] = useState(false)
+  const [emailValid, setEmailValid] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
   const [title, setTitle] = useState('')
   const [email, setEmail] = useState('')
 
@@ -41,16 +47,25 @@ export const MessagePage: React.FC = () => {
   }
 
   const handleHideModal = (): void => {
+    dispatch(messageActions.reset())
     setModalShown(false)
+    setErrorMessage(null)
+    setSuccessMessage(null)
   }
 
   const handleModalChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
     setModalChecked(event.target.checked)
   }
 
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    setEmail(value)
+    setEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
+  }
+
   const handleSaveMessage = (): void => {
     if (!message || !title) {
-      setError('Message and title are required')
+      setErrorMessage('Message and title are required')
       return
     }
 
@@ -69,22 +84,38 @@ export const MessagePage: React.FC = () => {
       // console.log(editorRef.current ? editorRef.current.getContent() : '')
     }
   }
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setEmail(event.target.value)
-  }
   // #endregion
   // #region Hooks
-  // Show error alert if processing.error is not null
   useEffect(() => {
     if (processing.error) {
-      setError(processing.error)
+      setErrorMessage(processing.error)
+    } else {
+      setErrorMessage(null)
     }
   }, [processing.error])
 
   useEffect(() => {
+    if (success) {
+      const time = formatTimestamp(success.sentAt)
+      setSuccessMessage(
+        `Message sent to ${success.reciversCount} subscriber(s) at ${time}`,
+      )
+    } else {
+      setSuccessMessage(null)
+    }
+  }, [success])
+
+  useEffect(() => {
     setRenderCount((prevCount) => prevCount + 1)
   }, [])
+  // #endregion
+  // #region Utils
+  const formatTimestamp = (timestamp: string): string => {
+    const date = new Date(timestamp)
+    const hours = date.getHours().toString().padStart(2, '0')
+    const minutes = date.getMinutes().toString().padStart(2, '0')
+    return `${hours}:${minutes}`
+  }
   // #endregion
   return (
     <div className={bem()}>
@@ -109,10 +140,8 @@ export const MessagePage: React.FC = () => {
 
         <Button
           className={bem('NextButton')}
-          loading={processing.pending}
-          loadingPosition="start"
           variant="contained"
-          disabled={!message || !title || processing.pending}
+          disabled={!message || !title || modalShown}
           onClick={handleShowModal}
         >
           Next
@@ -158,7 +187,6 @@ export const MessagePage: React.FC = () => {
         onEditorChange={handleEditorChange}
       />
 
-      {error && <div className={bem('Error')}>Error: {error}</div>}
       <DebugInfo info={`rendered ${renderCount} times`} />
 
       <Modal open={modalShown}>
@@ -199,11 +227,15 @@ export const MessagePage: React.FC = () => {
               className={bem('ModalSubmit')}
               variant="contained"
               loading={processing.pending}
+              disabled={processing.pending || !emailValid}
               onClick={handleSaveMessage}
             >
               Send
             </Button>
           </div>
+
+          {errorMessage && <div className={bem('ModalError')}>Error: {errorMessage}</div>}
+          {successMessage && <div className={bem('ModalSuccess')}>{successMessage}</div>}
         </Box>
       </Modal>
     </div>

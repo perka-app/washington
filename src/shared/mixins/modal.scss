@@ -34,3 +34,17 @@
   display: block !important;
   margin-top: 1rem !important;
 }
+
+@mixin modal-error() {
+  background: red;
+  color: white;
+  font-size: 1.5rem;
+  margin: 1rem 0 -1rem;
+}
+
+@mixin modal-success() {
+  background: green;
+  color: white;
+  font-size: 1.5rem;
+  margin: 1rem 0 -1rem;
+}
