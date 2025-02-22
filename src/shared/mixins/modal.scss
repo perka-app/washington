@@ -1,0 +1,50 @@
+// Modal layout
+@mixin modal($width: 400px) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--white);
+  border: 2px solid #000;
+  border-radius: 1rem;
+  box-shadow: 24px;
+  padding: 40px;
+  width: $width;
+}
+
+@mixin modal-close() {
+  cursor: pointer;
+  position: absolute !important;
+  right: 0;
+  top: 0;
+}
+
+@mixin modal-content() {
+  display: grid;
+  grid-gap: 1.5rem;
+  margin: auto;
+}
+
+@mixin modal-title() {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+@mixin modal-submit() {
+  display: block !important;
+  margin-top: 1rem !important;
+}
+
+@mixin modal-error() {
+  background: red;
+  color: white;
+  font-size: 1.5rem;
+  margin: 1rem 0 -1rem;
+}
+
+@mixin modal-success() {
+  background: green;
+  color: white;
+  font-size: 1.5rem;
+  margin: 1rem 0 -1rem;
+}

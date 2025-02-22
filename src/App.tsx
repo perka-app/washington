@@ -3,7 +3,7 @@ import { cn } from '@bem-react/classname'
 import { Routes, Route, Navigate } from 'react-router'
 
 import { AuthGuard, UnAuthGuard } from 'shared/guards'
-import { MessagePage } from 'pages/messagePage/MessagePage'
+import { MessagePage } from 'pages/message/MessagePage'
 import { DashboardPage } from 'pages/dashboard/DashboardPage'
 import { AppHeader } from 'shared/containers/AppHeader/AppHeader'
 import { LoginPage } from 'pages/login/LoginPage'

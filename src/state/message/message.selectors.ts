@@ -7,3 +7,8 @@ export const sendingMessageProcessSelector = createSelector(
   selectMessageSlice,
   (messageState) => messageState.proccesses.sendingMessage,
 )
+
+export const messageSuccessSelector = createSelector(
+  selectMessageSlice,
+  (messageState) => messageState.success,
+)
