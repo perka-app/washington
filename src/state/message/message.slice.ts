@@ -29,6 +29,13 @@ const messageSlice = createSlice({
       state.proccesses.sendingMessage.pending = true
       state.proccesses.sendingMessage.error = null
     },
+    sendTestMessage: (
+      state,
+      action: PayloadAction<{ title: string; message: string; email: string }>,
+    ) => {
+      state.proccesses.sendingMessage.pending = true
+      state.proccesses.sendingMessage.error = null
+    },
     sendMessageSuccess: (state) => {
       state.proccesses.sendingMessage.pending = false
     },

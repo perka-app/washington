@@ -18,4 +18,20 @@ const sendMessage$: Epic = (actions$, state$) =>
     ),
   )
 
-export const messageEpics = combineEpics(sendMessage$)
+const sendTestMessage$: Epic = (actions$, state$) =>
+  actions$.pipe(
+    filter(actions.sendTestMessage.match),
+    switchMap(({ payload }) =>
+      http()
+        .post(`/messages/${payload.email}`, {
+          subject: payload.title,
+          text: payload.message,
+        })
+        .pipe(
+          map((response) => actions.sendMessageSuccess(response.data)),
+          catchError((error: AxiosError) => of(actions.sendMessageError(error.message))),
+        ),
+    ),
+  )
+
+export const messageEpics = combineEpics(sendMessage$, sendTestMessage$)

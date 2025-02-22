@@ -2,5 +2,11 @@
   "semi": false,
   "singleQuote": true,
   "trailingComma": "all",
-  "printWidth": 90
+  "printWidth": 90,
+  "overrides": [
+    {
+      "files": "*.jsx",
+      "options": { "ignoreComments": true }
+    }
+  ]
 }
