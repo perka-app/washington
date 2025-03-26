@@ -12,7 +12,10 @@ Create a `.env` file in the root of the project and add the following:
 
 ```
 PORT=2000
-REACT_APP_API_URL=http://localhost:3000
+
+REACT_APP_API_URL="http://localhost:3000"
+REACT_APP_NAME="PERKA DASHBOARD"
+REACT_APP_TINYMCE_API_KEY=$TINYMCE_API_KEY
 ```
 
 ## Available Scripts

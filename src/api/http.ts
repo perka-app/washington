@@ -8,18 +8,14 @@ import { authInterceptor } from 'api/interceptors/auth.interceptor'
 import { RootState } from 'state/store'
 
 const baseURL = process.env.REACT_APP_API_URL
-  ? `https://${process.env.REACT_APP_API_URL}`
+  ? process.env.REACT_APP_API_URL
   : 'http://localhost:3000'
 
 // eslint-disable-next-line immutable/no-let
 let instance: Axios | null = null
 
 export interface RequestConfig extends AxiosRequestConfig {
-  context?: {
-    noBasicHeaders?: boolean
-    noLoadingBar?: boolean
-    provider?: string
-  }
+  context?: { noBasicHeaders?: boolean; noLoadingBar?: boolean; provider?: string }
   params: any
   headers: any
 }
@@ -30,19 +26,12 @@ export const setupInterceptors = (axi: Axios, store: Store<RootState>): void => 
 
 export const http = (): Axios => {
   if (!instance) {
-    instance = Axios.create({
-      baseURL,
-    })
+    instance = Axios.create({ baseURL })
   }
 
   return instance
 }
 
-export type Provider = {
-  authHeader: string
-  authValue: string
-}
+export type Provider = { authHeader: string; authValue: string }
 
-export type Providers = {
-  [key: string]: Provider
-}
+export type Providers = { [key: string]: Provider }

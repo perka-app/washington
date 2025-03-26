@@ -5,7 +5,7 @@ import { LoginResponse } from 'shared/models/LoginResponse'
 import { User } from 'shared/models/User'
 
 const API = process.env.REACT_APP_API_URL
-  ? `https://${process.env.REACT_APP_API_URL}`
+  ? process.env.REACT_APP_API_URL
   : 'http://localhost:3000'
 
 export const login = async ({ login, password }: LoginCredentials): Promise<string> => {
@@ -30,10 +30,7 @@ export const login = async ({ login, password }: LoginCredentials): Promise<stri
 export const getUserData = async (token: string): Promise<User> => {
   try {
     const response = await axios.get<User>(`${API}/organisations/data`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     })
 
     return response.data
@@ -74,10 +71,7 @@ export const saveUserData = async (token: string, user: User): Promise<void> => 
 
   try {
     await axios.patch(`${API}/organisations/data`, saveUserDataDto, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     })
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
