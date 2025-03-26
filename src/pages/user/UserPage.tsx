@@ -1,42 +1,28 @@
+// #region Imports
+// eslint-disable max-lines
+import { cn } from '@bem-react/classname'
+import { useNavigate } from 'react-router'
 import { CloudUpload, Edit, Close } from '@mui/icons-material'
 import { useSelector, useDispatch } from 'react-redux'
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
-import { cn } from '@bem-react/classname'
-import {
-  Avatar,
-  Box,
-  Button,
-  IconButton,
-  Input,
-  Modal,
-  Tooltip,
-  Typography,
-  TextareaAutosize,
-} from '@mui/material'
+import { useEffect, useState } from 'react'
+/* prettier-ignore */ import { Avatar, Box, Button, IconButton, Input, Modal, TextareaAutosize, Tooltip, Typography } from '@mui/material'
 
-import {
-  saveUserData,
-  uploadImage,
-  uploadingImageProcessSelector,
-  uploadingUserDataProcessSelector,
-  userSelector,
-} from 'state/user'
-import { User } from 'shared/models/User'
-import { AppDispatch } from 'state/store'
-import { HiddenInput } from 'shared/components/HidenInput'
+/* prettier-ignore */ import { saveUserData, uploadImage, uploadingImageProcessSelector, uploadingUserDataProcessSelector, userSelector } from 'state/user'
 import { ReactComponent as UserImage } from 'assets/buttons/user.svg'
+import { HiddenInput } from 'shared/components/HidenInput'
+import { AppDispatch } from 'state/store'
+import { User } from 'shared/models/User'
 
 import './UserPage.scss'
-
+// eslint-enable max-lines
+// #endregion
 export const UserPage: React.FC = () => {
   const bem = cn('User')
   const user = useSelector(userSelector)
   const saving = useSelector(uploadingUserDataProcessSelector)
-  const uploading = useSelector(uploadingImageProcessSelector)
-
   const dispatch = useDispatch<AppDispatch>()
   const navigate = useNavigate()
+  const uploading = useSelector(uploadingImageProcessSelector)
 
   const [email, setEmail] = useState('')
   const [openDesc, setOpenDesc] = useState(false)
@@ -45,7 +31,7 @@ export const UserPage: React.FC = () => {
   const [isEmailValid, setIsEmailValid] = useState(false)
   const [descriptionError, setDescriptionError] = useState('')
   const [isDescriptionValid, setIsDescriptionValid] = useState(false)
-
+  // #region Handlers
   const handleOpenDesc = () => {
     setDescription(user?.description || '')
     setOpenDesc(true)
@@ -85,12 +71,13 @@ export const UserPage: React.FC = () => {
 
     dispatch(uploadImage(image))
   }
-
+  // #endregion
+  // #region Hooks
   useEffect(() => {
     setOpenEmail(false)
     setOpenDesc(false)
   }, [user])
-
+  // #endregion
   return (
     <div className={bem()}>
       <Button
@@ -174,9 +161,11 @@ export const UserPage: React.FC = () => {
           <IconButton className={bem('ModalClose')} onClick={handleCloseEmail}>
             <Close />
           </IconButton>
+
           <Typography id="email-modal-title" variant="h6" sx={{ mb: 2 }}>
             Change your email
           </Typography>
+
           <Typography id="email-modal-desc" variant="h6" className={bem('ModalContent')}>
             <Input placeholder="Email" value={email} onChange={handleEmailChange} />
             <Button
@@ -205,9 +194,11 @@ export const UserPage: React.FC = () => {
           <IconButton className={bem('ModalClose')} onClick={handleCloseDesc}>
             <Close />
           </IconButton>
+
           <Typography id="desc-modal-title" variant="h6" sx={{ mb: 2 }}>
             Enter text describing yourself
           </Typography>
+
           <Typography id="desc-modal-desc" variant="h6" className={bem('ModalContent')}>
             <TextareaAutosize
               className={bem('ModalTextarea')}
